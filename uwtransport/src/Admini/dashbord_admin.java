@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package utilisateur;
+package Admini;
 
 /**
  *
  * @author Urbain
  */
-public class dashbord_utilisateur extends javax.swing.JFrame {
+public class dashbord_admin extends javax.swing.JFrame {
 
     /**
-     * Creates new form dashbord_utilisateur
+     * Creates new form dashbord_admin
      */
-    public dashbord_utilisateur() {
+    public dashbord_admin() {
         initComponents();
     }
 
@@ -59,20 +59,20 @@ public class dashbord_utilisateur extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dashbord_utilisateur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dashbord_admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dashbord_utilisateur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dashbord_admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dashbord_utilisateur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dashbord_admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dashbord_utilisateur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dashbord_admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dashbord_utilisateur().setVisible(true);
+                new dashbord_admin().setVisible(true);
             }
         });
     }
