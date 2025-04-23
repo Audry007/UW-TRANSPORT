@@ -19,6 +19,11 @@ public class type_vehicule {
         this.nom_type = nom_type;
     }
 
+    public type_vehicule(String nom_type) {
+        this.nom_type = nom_type;
+    }
+
+    
     public int getId_type() {
         return id_type;
     }

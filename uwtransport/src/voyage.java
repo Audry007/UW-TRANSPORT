@@ -9,7 +9,7 @@
  */
 public class voyage {
     private int id_voyage;
-    private int date_voyage;
+    private String date_voyage;
     private int idvehicule;
     private int id_chaufeur;
     private int id_trajet;
@@ -17,7 +17,7 @@ public class voyage {
     public voyage() {
     }
 
-    public voyage(int id_voyage, int date_voyage, int idvehicule, int id_chaufeur, int id_trajet) {
+    public voyage(int id_voyage, String date_voyage, int idvehicule, int id_chaufeur, int id_trajet) {
         this.id_voyage = id_voyage;
         this.date_voyage = date_voyage;
         this.idvehicule = idvehicule;
@@ -29,7 +29,7 @@ public class voyage {
         return id_voyage;
     }
 
-    public int getDate_voyage() {
+    public String getDate_voyage() {
         return date_voyage;
     }
 

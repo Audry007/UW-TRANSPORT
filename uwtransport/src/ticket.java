@@ -10,14 +10,14 @@
 public class ticket {
     private int id_ticket;
     private String numero_ticket;
-    private int date_emission;
+    private String date_emission;
     private int id_client;
     private int id_reservation;
 
     public ticket() {
     }
 
-    public ticket(int id_ticket, String numero_ticket, int date_emission, int id_client, int id_reservation) {
+    public ticket(int id_ticket, String numero_ticket, String date_emission, int id_client, int id_reservation) {
         this.id_ticket = id_ticket;
         this.numero_ticket = numero_ticket;
         this.date_emission = date_emission;
@@ -33,7 +33,7 @@ public class ticket {
         return numero_ticket;
     }
 
-    public int getDate_emission() {
+    public String getDate_emission() {
         return date_emission;
     }
 

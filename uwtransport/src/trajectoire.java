@@ -12,14 +12,14 @@ public class trajectoire {
     private int id_trajet;
     private String ville_depart;
     private String ville_arrive;
-    private int heure_depart;
+    private String heure_depart;
     private int prix_trajet;
-    private int duree_estime;
+    private String duree_estime;
 
     public trajectoire() {
     }
 
-    public trajectoire(int id_trajet, String ville_depart, String ville_arrive, int heure_depart, int prix_trajet, int duree_estime) {
+    public trajectoire(int id_trajet, String ville_depart, String ville_arrive, String heure_depart, int prix_trajet, String duree_estime) {
         this.id_trajet = id_trajet;
         this.ville_depart = ville_depart;
         this.ville_arrive = ville_arrive;
@@ -40,7 +40,7 @@ public class trajectoire {
         return ville_arrive;
     }
 
-    public int getHeure_depart() {
+    public String getHeure_depart() {
         return heure_depart;
     }
 
@@ -48,7 +48,7 @@ public class trajectoire {
         return prix_trajet;
     }
 
-    public int getDuree_estime() {
+    public String getDuree_estime() {
         return duree_estime;
     }
 
