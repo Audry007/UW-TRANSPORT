@@ -666,7 +666,7 @@ public class databaseMapper {
         }
     
      //=============================================== 5.6 count_select_all_role_we have ===============================
-         public int countrole(){
+         public int count_role(){
              String in="Select count(*) FROM role ";
              try{
                  stmt=con.createStatement();
@@ -682,53 +682,753 @@ public class databaseMapper {
     //-------------------------------------------------------------------------------------------------------------------
     //******************************************************************************************************************** 
     //--------------------------------------------------6.ticket---------------------------------------------------------
+    //============================================== 6.1 Add_ticket ======================================================
+         public int add_ticket(ticket r){
+             String add="INSERT INTO ticket (numero_ticket,date_emission,id_reservation) VALUES (?,?,?)";
+             try{
+                 pstmt=con.prepareStatement(add);
+                 pstmt.setString(1, r.getNumero_ticket());
+                 pstmt.setString(2, r.getDate_emission());
+                 pstmt.setInt(3,r.getId_reservation());
+                 
+                 int added=pstmt.executeUpdate();
+                 return added;
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+             return 0;
+         }
  
- 
+    //============================== 6.2 update_ticket   ==================================================================
+         public int update_ticket(ticket r){
+             String up="UPDATE ticket SET numero_ticket=?, date_emission=? , id_reservation=? WHERE id_ticket=?";
+             try{
+                 pstmt=con.prepareStatement(up);
+                 pstmt.setString(1, r.getNumero_ticket());
+                 pstmt.setString(2, r.getDate_emission());
+                 pstmt.setInt(3,r.getId_reservation());
+                 pstmt.setInt(4, r.getId_ticket());
+                 
+                 int added=pstmt.executeUpdate();
+                 return added;
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+             return 0;
+         }
+         
+    //======================================== 6.3 delete_ticket ========================================================
+        public int delete_ticket(ticket r){
+            String del="DELETE FROM role where id_role=?";
+            try{
+                pstmt=con.prepareStatement(del);
+                pstmt.setInt(1, r.getId_ticket());
+                
+                int pop=pstmt.executeUpdate();
+                return pop;
+            }catch(SQLException e){
+                System.err.println(e.getMessage());
+            }
+            return 0;
+        }
     
-    
+    //============================================== 6.4 select_ticket ==================================================
+        public List<ticket> select_ticket(){
+            List<ticket> found_ticket=new ArrayList<>();
+            String select="SELECT * FROM ticket";
+            try{
+               stmt=con.createStatement();
+               rs=stmt.executeQuery(select);
+               
+               while(rs.next()){
+                   int id=rs.getInt("id");
+                   String numero_ticket=rs.getString("numero_ticket");
+                   String date_emision=rs.getString("date_emision");
+                   int id_reservation=rs.getInt("id_reservation");
+                   
+                   
+                   ticket pp=new ticket(id,numero_ticket,date_emision,id_reservation);
+                   found_ticket.add(pp);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_ticket;
+        }
+        
+     //=================================================== 6.5 search_ticket ===========================================
+        public List<ticket> search_ticket(String txt){
+            List<ticket> found_ticket=new ArrayList<>();
+            String select="SELECT * FROM ticket WHERE numero_ticket LIKE ?";
+            try{
+                 pstmt=con.prepareStatement(select);
+                 pstmt.setString(1, "%" +txt+ "%");
+                 
+                 rs=pstmt.executeQuery();
+               while(rs.next()){
+                   int id=rs.getInt("id");
+                   String numero_ticket=rs.getString("numero_ticket");
+                   String date_emision=rs.getString("date_emision");
+                   int id_reservation=rs.getInt("id_reservation");
+                   
+                   
+                   ticket pp=new ticket(id,numero_ticket,date_emision,id_reservation);
+                   found_ticket.add(pp);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_ticket;
+        }
+        
+   //=================================================== 6.6 select_Count_ticket ======================================
+         public int count_ticket(){
+             String in="Select count(*) FROM ticket ";
+             try{
+                 stmt=con.createStatement();
+                 rs=stmt.executeQuery(in);
+                 if(rs.next()){
+                     return rs.getInt(1);
+                 }
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+             return 0;
+         }  
+    //================================================ 6.7 display et affichage ticket =================================
+        public List<ticket> generate_ticket(String txt){
+            List<ticket> found=new ArrayList<>();
+            String select="SELECT ticket.numero_ticket,client.nom_client,client.prenom_client,client.email_client,reservation.id_reservation FROM ticket inner join reservation ON reservation.id_reservation=ticket.id_reservation INNER JOIN client ON client.id_client=reservation.id_client";
+            try{
+                 stmt=con.createStatement();
+                 rs=stmt.executeQuery(select);
+                 
+               while(rs.next()){
+                   String numero_ticket=rs.getString("numero_ticket");
+                   String nom_client=rs.getString("nom_client");
+                   String prenom_client=rs.getString("prenom_client");
+                   String email_client=rs.getString("email_client"); 
+                   int id_reservation=rs.getInt("id_reservation");
+                   
+                   
+                   ticket pp=new ticket(numero_ticket,nom_client,prenom_client,email_client,id_reservation);
+                   found.add(pp);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found;
+        }
     //-------------------------------------------------------------------------------------------------------------------
     //******************************************************************************************************************** 
     //--------------------------------------------------7.trajectoire---------------------------------------
+     //============================================== 7.1 add trajectoire ===============================================
+        public int addtrajectoire(trajectoire t){
+               String add="INSERT INTO trajectoire (ville_depart,ville_arrive,heure_depart,prix_trajet,duree_estime) VALUES (?,?,?,?,?)";
+             try{
+                 pstmt=con.prepareStatement(add);
+                 pstmt.setString(1, t.getVille_depart());
+                 pstmt.setString(2, t.getVille_arrive());
+                 pstmt.setString(3,t.getHeure_depart());
+                 pstmt.setInt(4,t.getPrix_trajet());
+                 pstmt.setString(5,t.getDuree_estime());
+                 
+                 int added=pstmt.executeUpdate();
+                 return added;
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+            return 0;
+        }
  
- 
-    
-    
+   //====================================== 7.2 update trajectiore =================================================
+         public int update_trajectoire(trajectoire t){
+             String up="UPDATE trajectoire SET ville_depart=?, ville_arrive=? , heure_depart=? , prix_trajet=? , duree_estime=? WHERE id_trajet =?";
+             try{
+                 pstmt=con.prepareStatement(up);
+                 pstmt.setString(1, t.getVille_depart());
+                 pstmt.setString(2, t.getVille_arrive());
+                 pstmt.setString(3,t.getHeure_depart());
+                 pstmt.setInt(4,t.getPrix_trajet());
+                 pstmt.setString(5,t.getDuree_estime());
+                 pstmt.setInt(6, t.getId_trajet());
+                 
+                 int added=pstmt.executeUpdate();
+                 return added;
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+             return 0;
+         }
+         
+    //======================================== 7.3 delete trajectoire ================================================
+        public int delete_trajectoire(trajectoire t){
+            String del="DELETE FROM trajectoire where id_trajet =?";
+            try{
+                pstmt=con.prepareStatement(del);
+                pstmt.setInt(1, t.getId_trajet());
+                
+                int pop=pstmt.executeUpdate();
+                return pop;
+            }catch(SQLException e){
+                System.err.println(e.getMessage());
+            }
+            return 0;
+        }  
+        
+    //========================================== 7.4 select_all_Trajectoire ============================================
+        public List<trajectoire> select_trajectoire(){
+            List<trajectoire> found_trajet=new ArrayList<>();
+            String select="SELECT * FROM  trajectoire";
+            try{
+               stmt=con.createStatement();
+               rs=stmt.executeQuery(select);
+               
+               while(rs.next()){
+                   int id=rs.getInt("id");
+                   String ville_depart=rs.getString("ville_depart");
+                   String ville_arrive=rs.getString("ville_arrive");
+                   String heure_depart=rs.getString("heure_depart");
+                   int prix_trajet=rs.getInt("prix_trajet");
+                   String duree_estime=rs.getString("duree_estime");
+                   
+                   
+                   trajectoire p=new trajectoire(id,ville_depart,ville_arrive,heure_depart,prix_trajet,duree_estime);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        } 
+        
+     //=========================================== 7.5 search_from_Trajectoire ==========================================
+        public List<trajectoire> search_trajectoire(String txt){
+            List<trajectoire> found_trajet=new ArrayList<>();
+            String select="SELECT * FROM  trajectoire where ville_depart LIKE ?";
+            try{
+                
+                pstmt=con.prepareStatement(select);
+                pstmt.setString(1, "%"+txt+"%");
+                rs=pstmt.executeQuery();
+                
+               while(rs.next()){
+                   int id=rs.getInt("id");
+                   String ville_depart=rs.getString("ville_depart");
+                   String ville_arrive=rs.getString("ville_arrive");
+                   String heure_depart=rs.getString("heure_depart");
+                   int prix_trajet=rs.getInt("prix_trajet");
+                   String duree_estime=rs.getString("duree_estime");
+                   
+                   
+                   trajectoire p=new trajectoire(id,ville_depart,ville_arrive,heure_depart,prix_trajet,duree_estime);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            return found_trajet;
+        } 
+        
+    //=========================================== 7. 6 count select trajectoire ==============================================
+         public int count_trajectoire(){
+             String in="Select count(*) FROM trajectoire ";
+             try{
+                 stmt=con.createStatement();
+                 rs=stmt.executeQuery(in);
+                 if(rs.next()){
+                     return rs.getInt(1);
+                 }
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+             return 0;
+         }  
     //-------------------------------------------------------------------------------------------------------------------
     //******************************************************************************************************************** 
-    //--------------------------------------------------8.type_veliocule---------------------------------------
- 
- 
+    //--------------------------------------------------8.type_veliocule--------------------------------------------------
+    //================================================= 8.1 Add type_vehicule ============================================
+        public int add_type_vehicule(type_vehicule r){
+                String add="INSERT INTO type_vehicule (nom_type) VALUES (?)";
+                try{
+                    pstmt=con.prepareStatement(add);
+                    pstmt.setString(1, r.getNom_type());
+                    int added=pstmt.executeUpdate();
+                    return added;
+                }catch(SQLException e){
+                    System.err.println(e.getMessage());
+                }
+                return 0;
+        }
+    //========================================== 8.2 update type_vehicule ==============================================
+        public int update_type_vehicule(type_vehicule r){
+                   String up="UPDATE role SET nom_type=? WHERE id_type=?";
+            try{
+                pstmt=con.prepareStatement(up);
+                pstmt.setString(1, r.getNom_type());
+                pstmt.setInt(2, r.getId_type());
+
+                int upd=pstmt.executeUpdate();
+                return upd;
+            }catch(SQLException e){
+                System.err.println(e.getMessage());
+            }
+            return 0;
+        } 
+        
+    //========================================= 8.3 delete type_vehicule ===============================================
+        public int delete_type_vehicule(type_vehicule r){
+            String del="DELETE FROM  type_vehicule where id_ type=?";
+            try{
+                pstmt=con.prepareStatement(del);
+                pstmt.setInt(1, r.getId_type());
+                
+                int p=pstmt.executeUpdate();
+                return p;
+            }catch(SQLException e){
+                System.err.println(e.getMessage());
+            }
+            return 0;
+        }
+        
+    //=========================================== 8.4 select  type_vehicule =============================================
+        public List< type_vehicule> select_type_vehicule(){
+            List<type_vehicule> found=new ArrayList<>();
+            String select="SELECT * FROM  type_vehicule";
+            try{
+               stmt=con.createStatement();
+               rs=stmt.executeQuery(select);
+               
+               while(rs.next()){
+                   int id_type=rs.getInt("id_type");
+                   String nom_type=rs.getString("nom_type");
+                   
+                    type_vehicule pp=new  type_vehicule(id_type,nom_type);
+                   found.add(pp);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found;
+        }
+        
+    //============================================== 8.5 search type_vehicule ================================================
+        public List< type_vehicule> search_type_vehicule(String txt){
+            List<type_vehicule> found=new ArrayList<>();
+            String select="SELECT * FROM  type_vehicule where nom_type LIKE ?";
+            try{
+               stmt=con.createStatement();
+               rs=stmt.executeQuery(select);
+               
+               while(rs.next()){
+                   int id_type=rs.getInt("id_type");
+                   String nom_type=rs.getString("nom_type");
+                   
+                    type_vehicule pp=new  type_vehicule(id_type,nom_type);
+                   found.add(pp);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found;
+        }
+        
+    //=========================================== 8.6 count type_vehicule ===================================================
+        public int count_type_vehicule(){
+            String p="SELECT count(*) FROM type_vehicule";
+            try{
+              stmt=con.createStatement();
+              rs=stmt.executeQuery(p);
+              
+              if(rs.next()){
+                  return rs.getInt(1);
+              }
+            }catch(SQLException pp){
+                System.err.println(pp.getMessage());
+            }
+            return 0;
+        }
+    //-------------------------------------------------------------------------------------------------------------------
+    //********************************************************************************************************************* 
+    //--------------------------------------------------9.utulisateur-------------------------------------------------------
+    //=================================================== 9.1 Add_utilisateur ==============================================
+        public int add_utilisateur(utilisateur t){
+               String add="INSERT INTO utilisateur (matricule ,nom_user,prenom_user,email_user,telephone_user,username,motdepasse) VALUES (?,?,?,?,?,?,?)";
+             try{
+                 pstmt=con.prepareStatement(add);
+                 pstmt.setString(1, t.getMatricule());
+                 pstmt.setString(2, t.getNom_user());
+                 pstmt.setString(3,t.getPrenom_user());
+                 pstmt.setString(4,t.getEmail_user());
+                 pstmt.setString(5,t.getTelephone_user());
+                 pstmt.setString(6, t.getUsername());
+                 pstmt.setString(7, t.getMotdepasse());
+                 
+                 int added=pstmt.executeUpdate();
+                 return added;
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+            return 0;
+        }    
+        
+    //============================================== 9.2 update utilisateur ======================================================
+        public int update_utilisateur(utilisateur t){
+               String add="UPDATE  utilisateur SET nom_user =?,prenom_user =?,email_user =? ,telephone_user =?,username =?,motdepasse=? WHERE matricule=? ";
+             try{
+                 pstmt=con.prepareStatement(add);
+                 pstmt.setString(2, t.getNom_user());
+                 pstmt.setString(3,t.getPrenom_user());
+                 pstmt.setString(4,t.getEmail_user());
+                 pstmt.setString(5,t.getTelephone_user());
+                 pstmt.setString(6, t.getUsername());
+                 pstmt.setString(7, t.getMotdepasse());
+                 pstmt.setString(1, t.getMatricule());
+                 
+                 int added=pstmt.executeUpdate();
+                 return added;
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+            return 0;
+        }   
     
+    //=========================================== 9.3 delete utilisateur =========================================================
+        public int delete_utilisateur(utilisateur t){
+            String del="DELETE FROM utilisateur WHERE matricule=?";
+            try{
+                pstmt=con.prepareStatement(del);
+                pstmt.setString(1, t.getMatricule());
+                
+                int p=pstmt.executeUpdate();
+                return p;
+            }catch(SQLException ppp){
+                System.err.println(ppp.getMessage());
+            }
+            return 0;
+        }
+        
+    //====================================== 9.4 select utilisateur ==============================================================
+        public List<utilisateur> select_utilisateur(){
+            List<utilisateur> found_trajet=new ArrayList<>();
+            String select="SELECT * FROM  utilisateur";
+            try{
+               stmt=con.createStatement();
+               rs=stmt.executeQuery(select);
+               
+               while(rs.next()){
+                   String matricule=rs.getString("matricule");
+                   String nom_user=rs.getString("nom_user");
+                   String prenom_user=rs.getString("prenom_user");
+                   String email_user=rs.getString("email_user");
+                   String telephone_user=rs.getString("telephone_user");
+                   String username=rs.getString("username");
+                   String motdepasse=rs.getString("motdepasse");
+                   
+                   
+                   utilisateur p=new utilisateur(matricule,nom_user,prenom_user,email_user,telephone_user,username,motdepasse);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        }    
+        
+    //==========================================9 .5 search utilisateur =========================================================
+        public List<utilisateur> search_utilisateur( String txt){
+            List<utilisateur> found_trajet=new ArrayList<>();
+            String select="SELECT * FROM  utilisateur where matricule LIKE ?";
+            try{
+                pstmt=con.prepareStatement(select);
+                pstmt.setString(1, "%"+txt+"%");
+                
+                rs=pstmt.executeQuery();
+               while(rs.next()){
+                   String matricule=rs.getString("matricule");
+                   String nom_user=rs.getString("nom_user");
+                   String prenom_user=rs.getString("prenom_user");
+                   String email_user=rs.getString("email_user");
+                   String telephone_user=rs.getString("telephone_user");
+                   String username=rs.getString("username");
+                   String motdepasse=rs.getString("motdepasse");
+                   
+                   
+                   utilisateur p=new utilisateur(matricule,nom_user,prenom_user,email_user,telephone_user,username,motdepasse);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        }     
+    //===================================================== 9. 6 select_count_ utilisateur =======================================
+        public int count_utilisateur(){
+            String p="SELECT count(*) FROM utilisateur";
+            try{
+              stmt=con.createStatement();
+              rs=stmt.executeQuery(p);
+              
+              if(rs.next()){
+                  return rs.getInt(1);
+              }
+            }catch(SQLException pp){
+                System.err.println(pp.getMessage());
+            }
+            return 0;
+        }
+        
+    //----------------------------------------------------------------------------------------------------------------------
+    //*********************************************************************************************************************** 
+    //--------------------------------------------------10.vehicule----------------------------------------------------------
+    //================================================= 10.1 Add_vehicule ===================================================
+        public int add_vehicule(vehicule v){
+               String add="INSERT INTO vehicule (num_matricule ,marque,capacite,color,status,id_type) VALUES (?,?,?,?,?,?)";
+             try{
+                 pstmt=con.prepareStatement(add);
+                 pstmt.setString(1, v.getNum_matricule());
+                 pstmt.setString(2, v.getMarque());
+                 pstmt.setString(3,v.getCapacite());
+                 pstmt.setString(4,v.getColor());
+                 pstmt.setString(5,v.getStatus());
+                 pstmt.setInt(6, v.getId_type());
+                 
+                 int added=pstmt.executeUpdate();
+                 return added;
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+            return 0;
+        }  
+    //====================================================== 10.2 update_vehicule ==========================================
+        public int update_vehicule(vehicule v){
+               String add="UPDATE vehicule SET num_matricule=? ,marque=?,capacite=?,color=?,status=?,id_type=? WHERE idvehicule =? ";
+             try{
+                 pstmt=con.prepareStatement(add);
+                 pstmt.setString(1, v.getNum_matricule());
+                 pstmt.setString(2, v.getMarque());
+                 pstmt.setString(3,v.getCapacite());
+                 pstmt.setString(4,v.getColor());
+                 pstmt.setString(5,v.getStatus());
+                 pstmt.setInt(6, v.getId_type());
+                 pstmt.setInt(7, v.getIdvehicule());
+                 
+                 int added=pstmt.executeUpdate();
+                 return added;
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+            return 0;
+        }  
+    //========================================= 10.3 Delete_vehicule ================================================
+        public int delete_vehicule(vehicule t){
+            String del="DELETE FROM utilisateur WHERE idvehicule=?";
+            try{
+                pstmt=con.prepareStatement(del);
+                pstmt.setInt(1, t.getIdvehicule());
+                
+                int p=pstmt.executeUpdate();
+                return p;
+            }catch(SQLException ppp){
+                System.err.println(ppp.getMessage());
+            }
+            return 0;
+        }  
     
+    //================================================ 10.4 select vehicule ==========================================
+        public List<vehicule> select_vehicule(){
+            List<vehicule> found_trajet=new ArrayList<>();
+            String select="SELECT * FROM  vehicule";
+            try{
+               stmt=con.createStatement();
+               rs=stmt.executeQuery(select);
+               
+               while(rs.next()){
+                   int id=rs.getInt("id");
+                   String num_matricule=rs.getString("num_matricule");
+                   String marque=rs.getString("marque");
+                   String capacite=rs.getString("capacite");
+                   String color=rs.getString("color");
+                   String status=rs.getString("status");
+                   int id_type =rs.getInt("id_type ");
+                   
+                   
+                   vehicule p=new vehicule(id,num_matricule,marque,capacite,color,status,id_type);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        }
+        
+    //================================================= 10.5 search vehicule ============================================
+        public List<vehicule> search_vehicule(String txt){
+            List<vehicule> found_trajet=new ArrayList<>();
+            String select="SELECT * FROM  vehicule WHERE idvehicule Like ?";
+            try{
+                pstmt=con.prepareStatement(select);
+                pstmt.setString(1, "%"+txt+"%");
+                
+                rs=pstmt.executeQuery();
+               while(rs.next()){
+                   int id=rs.getInt("id");
+                   String num_matricule=rs.getString("num_matricule");
+                   String marque=rs.getString("marque");
+                   String capacite=rs.getString("capacite");
+                   String color=rs.getString("color");
+                   String status=rs.getString("status");
+                   int id_type =rs.getInt("id_type ");
+                   
+                   
+                   vehicule p=new vehicule(id,num_matricule,marque,capacite,color,status,id_type);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        } 
+        
+    //============================================== 10.6 count vehicule ===============================================
+        public int count_vehicule(){
+            String p="SELECT count(*) FROM vehicule";
+            try{
+              stmt=con.createStatement();
+              rs=stmt.executeQuery(p);
+              
+              if(rs.next()){
+                  return rs.getInt(1);
+              }
+            }catch(SQLException pp){
+                System.err.println(pp.getMessage());
+            }
+            return 0;
+        }  
     //-------------------------------------------------------------------------------------------------------------------
     //******************************************************************************************************************** 
-    //--------------------------------------------------9.utulisateur---------------------------------------
- 
- 
+    //--------------------------------------------------11.voyage---------------------------------------------------------
+    //================================================= 11.1 add voyage ==================================================
+        public int add_voyage(voyage v){
+               String add="INSERT INTO voyage (nom_voyage ,date_voyage,idvehicule ,id_chaufeur ,id_trajet ) VALUES (?,?,?,?,?)";
+             try{
+                 pstmt=con.prepareStatement(add);
+                 pstmt.setString(1, v.getNom_voyage());
+                 pstmt.setString(2, v.getDate_voyage());
+                 pstmt.setInt(3,v.getIdvehicule());
+                 pstmt.setInt(4,v.getId_chaufeur());
+                 pstmt.setInt(5,v.getId_trajet());
+                 
+                 int added=pstmt.executeUpdate();
+                 return added;
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+            return 0;
+        }   
     
+    //=================================================== 11.2 update voyage ==============================================
+        public int update_voyage(voyage v){
+               String add="UPDATE  voyage SET nom_voyage=? ,date_voyage =?,idvehicule=? ,id_chaufeur=?,id_trajet=? WHERE id_voyage =?";
+             try{
+                 pstmt=con.prepareStatement(add);
+                 pstmt.setString(1, v.getNom_voyage());
+                 pstmt.setString(2, v.getDate_voyage());
+                 pstmt.setInt(3,v.getIdvehicule());
+                 pstmt.setInt(4,v.getId_chaufeur());
+                 pstmt.setInt(5,v.getId_trajet());
+                 pstmt.setInt(6,v.getId_voyage());
+                 
+                 int added=pstmt.executeUpdate();
+                 return added;
+             }catch(SQLException e){
+                 System.err.println(e.getMessage());
+             }
+            return 0;
+        }   
     
-    //-------------------------------------------------------------------------------------------------------------------
-    //******************************************************************************************************************** 
-    //--------------------------------------------------10.vehicule---------------------------------------
- 
- 
-    
-    
-    //-------------------------------------------------------------------------------------------------------------------
-    //******************************************************************************************************************** 
-    //--------------------------------------------------11.voyage---------------------------------------
- 
- 
-    
-    
-    //-------------------------------------------------------------------------------------------------------------------
-    
+    //==================================================== 11.3 delete voyage ===========================================
+        public int delete_voyage(voyage t){
+            String del="DELETE FROM voyage WHERE id_voyage=?";
+            try{
+                pstmt=con.prepareStatement(del);
+                pstmt.setInt(1, t.getId_voyage());
+                
+                int p=pstmt.executeUpdate();
+                return p;
+            }catch(SQLException ppp){
+                System.err.println(ppp.getMessage());
+            }
+            return 0;
+        }  
+        
+    //==================================================== 11.4 select all voyage ========================================
+        public List<voyage> select_all_voyage(){
+            List<voyage> found_trajet=new ArrayList<>();
+            String select="SELECT * FROM  voyage";
+            try{
+               stmt=con.createStatement();
+               rs=stmt.executeQuery(select);
+               
+               while(rs.next()){
+                   int id=rs.getInt("id");
+                   String nom_voyage=rs.getString("nom_voyage");
+                   String date_voyage=rs.getString("date_voyage");
+                   int idvehicule=rs.getInt("idvehicule");
+                   int id_chaufeur =rs.getInt("id_chaufeur");
+                   int id_trajet  =rs.getInt("id_trajet ");
+                   
+                   
+                   voyage p=new voyage(id,nom_voyage,date_voyage,idvehicule,id_chaufeur ,id_trajet);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        }
+        
+    //========================================= 11.5 search voyage =======================================================
+        public List<voyage> search_voyage(String txt){
+            List<voyage> found_trajet=new ArrayList<>();
+            String select="SELECT * FROM  voyage WHERE nom_voyage LIKE ? ";
+            try{
+               pstmt=con.prepareStatement(select);
+               pstmt.setString(1, "%"+txt+"%");
+               
+               rs=pstmt.executeQuery();
+               while(rs.next()){
+                   int id=rs.getInt("id");
+                   String nom_voyage=rs.getString("nom_voyage");
+                   String date_voyage=rs.getString("date_voyage");
+                   int idvehicule=rs.getInt("idvehicule");
+                   int id_chaufeur =rs.getInt("id_chaufeur");
+                   int id_trajet  =rs.getInt("id_trajet ");
+                   
+                   
+                   voyage p=new voyage(id,nom_voyage,date_voyage,idvehicule,id_chaufeur ,id_trajet);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        }
+
+    //--------------------------------------------------------------------------------------------------------------------
     //####################################################################################################################
-    //-----------------------------SQL Operation for Administrator---------------------------------------------------
-    
-    
-    
-    
-    //------------------------------------------------------------------------------------------------------------------
     
 }
+                    

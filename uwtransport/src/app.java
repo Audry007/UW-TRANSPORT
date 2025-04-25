@@ -41,14 +41,14 @@ public class app extends javax.swing.JFrame {
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(header, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(header, java.awt.BorderLayout.PAGE_END);
 
         menu.setBackground(java.awt.Color.green);
         menu.setPreferredSize(new java.awt.Dimension(270, 450));
@@ -69,7 +69,7 @@ public class app extends javax.swing.JFrame {
 
         menu.add(jPanel1, java.awt.BorderLayout.LINE_START);
 
-        getContentPane().add(menu, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(menu, java.awt.BorderLayout.PAGE_END);
 
         containeur.setBackground(java.awt.Color.white);
 
@@ -77,11 +77,11 @@ public class app extends javax.swing.JFrame {
         containeur.setLayout(containeurLayout);
         containeurLayout.setHorizontalGroup(
             containeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         containeurLayout.setVerticalGroup(
             containeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
         getContentPane().add(containeur, java.awt.BorderLayout.CENTER);

@@ -9,6 +9,7 @@
  */
 public class voyage {
     private int id_voyage;
+    private String nom_voyage;
     private String date_voyage;
     private int idvehicule;
     private int id_chaufeur;
@@ -17,14 +18,23 @@ public class voyage {
     public voyage() {
     }
 
-    public voyage(int id_voyage, String date_voyage, int idvehicule, int id_chaufeur, int id_trajet) {
+    public voyage(int id_voyage, String nom_voyage, String date_voyage, int idvehicule, int id_chaufeur, int id_trajet) {
         this.id_voyage = id_voyage;
+        this.nom_voyage = nom_voyage;
         this.date_voyage = date_voyage;
         this.idvehicule = idvehicule;
         this.id_chaufeur = id_chaufeur;
         this.id_trajet = id_trajet;
     }
 
+    public voyage(String nom_voyage, String date_voyage, int idvehicule, int id_chaufeur, int id_trajet) {
+        this.nom_voyage = nom_voyage;
+        this.date_voyage = date_voyage;
+        this.idvehicule = idvehicule;
+        this.id_chaufeur = id_chaufeur;
+        this.id_trajet = id_trajet;
+    }
+    
     public int getId_voyage() {
         return id_voyage;
     }
@@ -45,9 +55,15 @@ public class voyage {
         return id_trajet;
     }
 
+    public String getNom_voyage() {
+        return nom_voyage;
+    }
+
     @Override
     public String toString() {
-        return "voyage{" + "id_voyage=" + id_voyage + ", date_voyage=" + date_voyage + ", idvehicule=" + idvehicule + ", id_chaufeur=" + id_chaufeur + ", id_trajet=" + id_trajet + '}';
+        return "voyage{" + "id_voyage=" + id_voyage + ", nom_voyage=" + nom_voyage + ", date_voyage=" + date_voyage + ", idvehicule=" + idvehicule + ", id_chaufeur=" + id_chaufeur + ", id_trajet=" + id_trajet + '}';
     }
+
+    
     
 }

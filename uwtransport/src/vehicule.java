@@ -29,7 +29,9 @@ public class vehicule {
         this.status = status;
         this.id_type = id_type;
     }
-
+    
+    
+    
     public int getIdvehicule() {
         return idvehicule;
     }
