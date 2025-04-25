@@ -30,6 +30,11 @@ private String matricule;
         this.motdepasse = motdepasse;
     }
 
+    public utilisateur(String email_user, String motdepasse) {
+        this.email_user = email_user;
+        this.motdepasse = motdepasse;
+    }
+
     public String getMatricule() {
         return matricule;
     }

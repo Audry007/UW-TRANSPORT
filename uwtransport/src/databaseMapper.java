@@ -1426,9 +1426,78 @@ public class databaseMapper {
             
             return found_trajet;
         }
-
+        
+    //=========================================== 11.6 count voyage =======================================================
+        public int count_voyage(){
+            String p="SELECT count(*) FROM voyage";
+            try{
+              stmt=con.createStatement();
+              rs=stmt.executeQuery(p);
+              
+              if(rs.next()){
+                  return rs.getInt(1);
+              }
+            }catch(SQLException pp){
+                System.err.println(pp.getMessage());
+            }
+            return 0;
+        }        
+    
+    //========================================== 11.7 select voyage _chaufeur ============================================
+        public List<voyage> select_voyage_chaufeur(){
+            List<voyage> found_trajet=new ArrayList<>();
+            String select="SELECT voyage.id_voyage,voyage.nom_voyage,voyage.date_voyage,chaufeur.nom_chaufeur,chaufeur.prenom_chaufeur,chaufeur.permi_conduire FROM voyage INNER JOIN chaufeur ON chaufeur.id_chaufeur=voyage.id_chaufeur";
+            try{
+               stmt=con.createStatement();
+               rs=stmt.executeQuery(select);
+               
+               while(rs.next()){
+                   int id=rs.getInt("id");
+                   String nom_voyage=rs.getString("nom_voyage");
+                   String date_voyage=rs.getString("date_voyage");
+                   String nom_chaufeur=rs.getString("nom_chaufeur");
+                   String prenom_chaufeur=rs.getString("prenom_chaufeur");
+                   String permi_conduire=rs.getString("permi_conduire");
+                   
+                   
+                   voyage p=new voyage(id,nom_voyage,date_voyage,nom_chaufeur,prenom_chaufeur,permi_conduire);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        }       
     //--------------------------------------------------------------------------------------------------------------------
     //####################################################################################################################
-    
+    //========================================= Login function ===========================================================
+      public int login(utilisateur p){
+          String log="SELECT utilisateur.email_user,utilisateur.motdepasse FROM utilisateur WHERE email=? AND motdepasse=?";
+          String adm="SELECT utilisateur.email_user,utilisateur.motdepasse,nom_role FROM utilisateur INNER JOIN (role INNER JOIN  exercer) ON utilisateur.matricule=exercer.matricule AND role.id_role=exercer.id_role WHERE email=? AND motdepasse=? AND role.nom_role='DG'";
+          try{
+              pstmt=con.prepareStatement(log);
+              pstmt.setString(1, p.getEmail_user());
+              pstmt.setString(2, p.getMotdepasse());
+              
+              rs=pstmt.executeQuery();
+              if(rs.next()){
+                    pstmt=con.prepareStatement(adm);
+                    pstmt.setString(1, p.getEmail_user());
+                    pstmt.setString(2, p.getMotdepasse());
+
+                   ResultSet admin=pstmt.executeQuery();
+                   
+                   if(admin.next()){
+                       return 2;
+                   }else{
+                       return 1;
+                   }
+              }
+          }catch(SQLException qr){
+              System.err.println(qr.getMessage());
+          }
+          return 0;
+      }
 }
                     
