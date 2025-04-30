@@ -31,12 +31,12 @@ DROP TABLE IF EXISTS `chaufeur`;
 CREATE TABLE IF NOT EXISTS `chaufeur` (
   `id_chaufeur` int NOT NULL AUTO_INCREMENT,
   `nom_chaufeur` varchar(20) NOT NULL,
-  `prenom_chaufeur` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `prenom_chaufeur` varchar(40) NOT NULL,
   `email_chaufeur` varchar(45) NOT NULL,
   `telephone_chaufeur` varchar(40) NOT NULL,
   `permi_conduire` varchar(45) NOT NULL,
   PRIMARY KEY (`id_chaufeur`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Déchargement des données de la table `chaufeur`
@@ -58,11 +58,11 @@ DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
   `id_client` int NOT NULL AUTO_INCREMENT,
   `nom_client` varchar(100) NOT NULL,
-  `prenom_client` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `prenom_client` varchar(50) NOT NULL,
   `telephone_client` varchar(50) NOT NULL,
   `email_client` varchar(50) NOT NULL,
   PRIMARY KEY (`id_client`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Déchargement des données de la table `client`
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `exercer` (
   PRIMARY KEY (`id_exercer`),
   KEY `matricule` (`matricule`),
   KEY `id_role` (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Déchargement des données de la table `exercer`
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   KEY `id_voyage` (`id_voyage`),
   KEY `id_client` (`id_client`),
   KEY `matricule` (`matricule`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Déchargement des données de la table `reservation`
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `role` (
   `id_role` int NOT NULL AUTO_INCREMENT,
   `nom_role` varchar(100) NOT NULL,
   PRIMARY KEY (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Déchargement des données de la table `role`
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `id_reservation` int NOT NULL,
   PRIMARY KEY (`id_ticket`),
   KEY `id_reservation` (`id_reservation`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Déchargement des données de la table `ticket`
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `trajectoire` (
   `prix_trajet` int NOT NULL,
   `duree_estime` int NOT NULL,
   PRIMARY KEY (`id_trajet`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Déchargement des données de la table `trajectoire`
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `type_vehicule` (
   `id_type` int NOT NULL AUTO_INCREMENT,
   `nom_type` varchar(100) NOT NULL,
   PRIMARY KEY (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Déchargement des données de la table `type_vehicule`
@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `username` varchar(45) NOT NULL,
   `motdepasse` varchar(45) NOT NULL,
   PRIMARY KEY (`matricule`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `vehicule` (
   `id_type` int NOT NULL,
   PRIMARY KEY (`idvehicule`),
   KEY `id_type` (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Déchargement des données de la table `vehicule`
@@ -287,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `voyage` (
   KEY `idvehicule` (`idvehicule`),
   KEY `id_chaufeur` (`id_chaufeur`),
   KEY `id_trajet` (`id_trajet`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Déchargement des données de la table `voyage`
