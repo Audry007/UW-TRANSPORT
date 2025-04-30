@@ -2,7 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author audry
@@ -12,12 +17,23 @@ public class index extends javax.swing.JFrame {
     /**
      * Creates new form index
      */
+    private databaseMapper dbm;
     public index() {
+        
         initComponents();
+        dbm=new databaseMapper();
         setTitle("UW-Transport");
         this.setResizable( false);
+        
     }
-
+    
+    //=================== method for clearing the input ========================
+    public void clearInput(utilisateur p){
+      email.setText("");
+      password.setText("");
+         
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,9 +48,9 @@ public class index extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        email = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
+        Login = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -62,29 +78,33 @@ public class index extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("Password");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(82, 81, 81));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 1, true));
+        email.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        email.setForeground(new java.awt.Color(82, 81, 81));
+        email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        email.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 1, true));
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(82, 81, 81));
-        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPasswordField1.setText("********");
-        jPasswordField1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 1, true));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        password.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        password.setForeground(new java.awt.Color(82, 81, 81));
+        password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 1, true));
+        password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                passwordActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(82, 81, 81));
-        jButton1.setText("Login");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(34, 97, 168), 2));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Login.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        Login.setForeground(new java.awt.Color(82, 81, 81));
+        Login.setText("Login");
+        Login.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(34, 97, 168), 2));
+        Login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LoginMouseClicked(evt);
+            }
+        });
+        Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                LoginActionPerformed(evt);
             }
         });
 
@@ -120,9 +140,9 @@ public class index extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(AuthentificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                    .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(Login, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         AuthentificationLayout.setVerticalGroup(
@@ -135,16 +155,16 @@ public class index extends javax.swing.JFrame {
                 .addGroup(AuthentificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(AuthentificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39)
                 .addGroup(AuthentificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(AuthentificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(47, 47, 47)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(73, Short.MAX_VALUE))
         );
 
@@ -153,13 +173,39 @@ public class index extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_passwordActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_LoginActionPerformed
+
+    private void LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginMouseClicked
+         // TODO add your handling code here:
+        String mail=email.getText();
+        String passwd=password.getText();
+        
+        utilisateur log=new utilisateur(mail,passwd);
+        
+          if(mail.isEmpty()){
+                 JOptionPane.showMessageDialog(rootPane, "Email is requide");
+            }else if(passwd.isEmpty()){
+                 JOptionPane.showMessageDialog(rootPane, "Password is requide");
+             }else{
+                if(dbm.login(log)==1){
+                    Simple_Utilisateur show=new Simple_Utilisateur();
+                    show.setVisible(true);
+                    this.setVisible(false);
+                }else if(dbm.login(log)==2){
+                     JOptionPane.showMessageDialog(rootPane, "You are login as Administrator");
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Email or Password is not correct !! ");
+                    clearInput(log);
+
+                }
+       }
+    }//GEN-LAST:event_LoginMouseClicked
 
     /**
      * @param args the command line arguments
@@ -198,14 +244,14 @@ public class index extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Authentification;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Login;
+    private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField password;
     // End of variables declaration//GEN-END:variables
 }

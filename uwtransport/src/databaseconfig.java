@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class databaseconfig {
     
         private Connection con=null;
-        private String url="jdbc:mysql://localhost:3306/uwtransport?";
+        private String url="jdbc:mysql://localhost:3306/uw-transport?";
         private final String username="root";
         private final String password="";
           

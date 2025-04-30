@@ -1473,8 +1473,8 @@ public class databaseMapper {
     //####################################################################################################################
     //========================================= Login function ===========================================================
       public int login(utilisateur p){
-          String log="SELECT utilisateur.email_user,utilisateur.motdepasse FROM utilisateur WHERE email=? AND motdepasse=?";
-          String adm="SELECT utilisateur.email_user,utilisateur.motdepasse,nom_role FROM utilisateur INNER JOIN (role INNER JOIN  exercer) ON utilisateur.matricule=exercer.matricule AND role.id_role=exercer.id_role WHERE email=? AND motdepasse=? AND role.nom_role='DG'";
+          String log="SELECT utilisateur.email_user,utilisateur.motdepasse FROM utilisateur WHERE email_user=? AND motdepasse=?";
+          String adm="SELECT utilisateur.email_user,utilisateur.motdepasse,nom_role FROM utilisateur INNER JOIN (role INNER JOIN  exercer) ON utilisateur.matricule=exercer.matricule AND role.id_role=exercer.id_role WHERE email_user=? AND motdepasse=? AND role.nom_role='DG'";
           try{
               pstmt=con.prepareStatement(log);
               pstmt.setString(1, p.getEmail_user());
