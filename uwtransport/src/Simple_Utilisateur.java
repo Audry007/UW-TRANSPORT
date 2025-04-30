@@ -76,7 +76,7 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         client_menu = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        reservation = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -98,7 +98,7 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         show_client = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jButton11 = new javax.swing.JButton();
+        reservation1 = new javax.swing.JButton();
         show_reservation = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
@@ -187,13 +187,18 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Client_27px.png"))); // NOI18N
 
-        jButton3.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(82, 81, 81));
-        jButton3.setText("Reservation");
-        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        reservation.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        reservation.setForeground(new java.awt.Color(82, 81, 81));
+        reservation.setText("Reservation");
+        reservation.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        reservation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reservationMouseClicked(evt);
+            }
+        });
+        reservation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                reservationActionPerformed(evt);
             }
         });
 
@@ -294,7 +299,7 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(client_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(reservation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -310,7 +315,7 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(reservation, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -439,13 +444,13 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(200, 197, 197));
         jPanel9.setPreferredSize(new java.awt.Dimension(140, 70));
 
-        jButton11.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(82, 81, 81));
-        jButton11.setText("Reservation");
-        jButton11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        reservation1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        reservation1.setForeground(new java.awt.Color(82, 81, 81));
+        reservation1.setText("Reservation");
+        reservation1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        reservation1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                reservation1ActionPerformed(evt);
             }
         });
 
@@ -466,7 +471,7 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(reservation1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addComponent(show_reservation, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -484,7 +489,7 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(show_reservation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(reservation1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -756,9 +761,9 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void reservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_reservationActionPerformed
 
     private void client_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_client_menuActionPerformed
         // TODO add your handling code here:
@@ -768,9 +773,12 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_client2ActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void reservation1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservation1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+        Simple_User_Reservation p=new Simple_User_Reservation();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_reservation1ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
@@ -814,6 +822,13 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_client2MouseClicked
 
+    private void reservationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservationMouseClicked
+        // TODO add your handling code here:
+        Simple_User_Reservation p=new Simple_User_Reservation();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_reservationMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -854,12 +869,10 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
     private javax.swing.JButton Logout;
     private javax.swing.JButton client2;
     private javax.swing.JButton client_menu;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -895,6 +908,8 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JButton reservation;
+    private javax.swing.JButton reservation1;
     private javax.swing.JLabel show_chaufeur;
     private javax.swing.JLabel show_client;
     private javax.swing.JLabel show_reservation;
