@@ -535,17 +535,17 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextField5" min="-2" pref="95" max="-2" attributes="0"/>
-                              <Component id="jTextField7" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                              <Component id="jTextField8" min="-2" pref="95" max="-2" attributes="0"/>
-                              <Component id="jTextField9" min="-2" pref="95" max="-2" attributes="0"/>
-                              <Component id="jTextField10" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="email" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="telephone" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="prenom" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="id" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="nom" min="-2" pref="95" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                          <Component id="jButton9" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="add_client" min="-2" pref="135" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -562,31 +562,31 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField9" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="id" min="-2" pref="26" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField10" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="nom" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel14" alignment="3" max="32767" attributes="0"/>
-                              <Component id="jTextField8" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="prenom" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField7" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="telephone" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextField5" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="email" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                               <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="jButton9" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="add_client" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -617,7 +617,7 @@
                     <Property name="text" type="java.lang.String" value="id_client"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField5">
+                <Component class="javax.swing.JTextField" name="email">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -629,7 +629,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton9">
+                <Component class="javax.swing.JButton" name="add_client">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI Black" size="14" style="0"/>
@@ -646,6 +646,9 @@
                       </Border>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="add_clientMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel13">
                   <Properties>
@@ -695,7 +698,7 @@
                     <Property name="text" type="java.lang.String" value="Email"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField7">
+                <Component class="javax.swing.JTextField" name="telephone">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -707,7 +710,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField8">
+                <Component class="javax.swing.JTextField" name="prenom">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -719,7 +722,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField9">
+                <Component class="javax.swing.JTextField" name="id">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -731,7 +734,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField10">
+                <Component class="javax.swing.JTextField" name="nom">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -980,9 +983,6 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="15"/>
                       </Properties>
-                      <AccessibilityProperties>
-                        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="15"/>
-                      </AccessibilityProperties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1080,7 +1080,7 @@
                           <EmptySpace pref="25" max="32767" attributes="0"/>
                           <Component id="jLabel20" min="-2" pref="58" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jLabel19" min="-2" pref="64" max="-2" attributes="0"/>
+                          <Component id="count_all" min="-2" pref="64" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1092,7 +1092,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel18" pref="30" max="32767" attributes="0"/>
                               <Component id="jLabel20" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jLabel19" alignment="1" max="32767" attributes="0"/>
+                              <Component id="count_all" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -1108,7 +1108,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel19">
+                <Component class="javax.swing.JLabel" name="count_all">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI Black" size="18" style="0"/>

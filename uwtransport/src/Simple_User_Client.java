@@ -2,7 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author audry
@@ -12,12 +17,29 @@ public class Simple_User_Client extends javax.swing.JFrame {
     /**
      * Creates new form Simple_User_Client
      */
+    private databaseMapper dbm;
     public Simple_User_Client() {
         initComponents();
+        dbm=new databaseMapper();
         setTitle("UW-Transport");
-        this.setResizable( false);
+        
+        //les differents procedure initial 
+        count_all_client();
     }
 
+    //get_count all client
+    public void count_all_client(){
+       int total_get=dbm.countclient();
+       count_all.setText(""+total_get+"");
+    }
+    
+    //clear input in adding
+    public void clearInput(client p){
+        nom.setText("");
+        prenom.setText("");
+        telephone.setText("");
+        email.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,16 +74,16 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
+        email = new javax.swing.JTextField();
+        add_client = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        telephone = new javax.swing.JTextField();
+        prenom = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
+        nom = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -78,7 +100,7 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        count_all = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -305,13 +327,18 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("id_client");
 
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        email.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
-        jButton9.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(82, 81, 81));
-        jButton9.setText("Add+");
-        jButton9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        add_client.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        add_client.setForeground(new java.awt.Color(82, 81, 81));
+        add_client.setText("Add+");
+        add_client.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        add_client.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                add_clientMouseClicked(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(82, 81, 81));
@@ -333,17 +360,17 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Email");
 
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        telephone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        telephone.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        prenom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        prenom.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
-        jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        id.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
-        jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        nom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nom.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -376,15 +403,15 @@ public class Simple_User_Client extends javax.swing.JFrame {
                         .addComponent(jLabel16)
                         .addGap(50, 50, 50)))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(add_client, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -398,25 +425,25 @@ public class Simple_User_Client extends javax.swing.JFrame {
                         .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addGap(27, 27, 27)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(add_client, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
 
@@ -494,8 +521,6 @@ public class Simple_User_Client extends javax.swing.JFrame {
                 .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        jLabel21.getAccessibleContext().setAccessibleName("15");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -584,10 +609,10 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Client_27px.png"))); // NOI18N
 
-        jLabel19.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("11");
+        count_all.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        count_all.setForeground(new java.awt.Color(255, 51, 51));
+        count_all.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        count_all.setText("11");
 
         jLabel20.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(82, 81, 81));
@@ -604,7 +629,7 @@ public class Simple_User_Client extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(count_all, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
         jPanel12Layout.setVerticalGroup(
@@ -614,7 +639,7 @@ public class Simple_User_Client extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(count_all, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -663,7 +688,9 @@ public class Simple_User_Client extends javax.swing.JFrame {
 
     private void DashbordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashbordMouseClicked
         // TODO add your handling code here:
-        this.setVisible(true);
+        Simple_Utilisateur p=new Simple_Utilisateur();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_DashbordMouseClicked
 
     private void DashbordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashbordActionPerformed
@@ -709,6 +736,24 @@ public class Simple_User_Client extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+    private void add_clientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_clientMouseClicked
+        // TODO add your handling code here:
+        String nomC=nom.getText();
+        String prenomC=prenom.getText();
+        String telephoneC=telephone.getText();
+        String emailC=email.getText();
+        
+        client addd=new client(nomC,prenomC,telephoneC,emailC);
+        if(dbm.addclinet(addd)==1){
+            JOptionPane.showMessageDialog(rootPane, "Client added succesful !");
+            count_all_client();
+            clearInput(addd);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "error ! something went wrong");
+        }
+        
+    }//GEN-LAST:event_add_clientMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -747,6 +792,10 @@ public class Simple_User_Client extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Dashbord;
     private javax.swing.JButton Logout;
+    private javax.swing.JButton add_client;
+    private javax.swing.JLabel count_all;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -757,7 +806,6 @@ public class Simple_User_Client extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -768,7 +816,6 @@ public class Simple_User_Client extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -781,8 +828,6 @@ public class Simple_User_Client extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
@@ -792,14 +837,11 @@ public class Simple_User_Client extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField nom;
+    private javax.swing.JTextField prenom;
+    private javax.swing.JTextField telephone;
     // End of variables declaration//GEN-END:variables
 }
