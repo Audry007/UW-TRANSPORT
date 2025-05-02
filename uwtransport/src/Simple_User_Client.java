@@ -57,9 +57,9 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        reservation = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        vehiculemenu = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -162,23 +162,28 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Client_27px.png"))); // NOI18N
 
-        jButton3.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(82, 81, 81));
-        jButton3.setText("Reservation");
-        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        reservation.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        reservation.setForeground(new java.awt.Color(82, 81, 81));
+        reservation.setText("Reservation");
+        reservation.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        reservation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                reservationActionPerformed(evt);
             }
         });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/reservation_27px.png"))); // NOI18N
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(82, 81, 81));
-        jButton4.setText("Vehicule");
-        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        vehiculemenu.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        vehiculemenu.setForeground(new java.awt.Color(82, 81, 81));
+        vehiculemenu.setText("Vehicule");
+        vehiculemenu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        vehiculemenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vehiculemenuMouseClicked(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Vehicule_27px.png"))); // NOI18N
         jLabel5.setText("jLabel5");
@@ -248,11 +253,11 @@ public class Simple_User_Client extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(reservation, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(vehiculemenu, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -283,11 +288,11 @@ public class Simple_User_Client extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reservation, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vehiculemenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -710,9 +715,12 @@ public class Simple_User_Client extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void reservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        Simple_User_Reservation p=new Simple_User_Reservation();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_reservationActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -763,6 +771,13 @@ public class Simple_User_Client extends javax.swing.JFrame {
         
     }//GEN-LAST:event_add_clientMouseClicked
 
+    private void vehiculemenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehiculemenuMouseClicked
+        // TODO add your handling code here:
+        Simple_User_Vehicule p=new Simple_User_Vehicule();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_vehiculemenuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -809,8 +824,6 @@ public class Simple_User_Client extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -852,6 +865,8 @@ public class Simple_User_Client extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField nom;
     private javax.swing.JTextField prenom;
+    private javax.swing.JButton reservation;
     private javax.swing.JTextField telephone;
+    private javax.swing.JButton vehiculemenu;
     // End of variables declaration//GEN-END:variables
 }

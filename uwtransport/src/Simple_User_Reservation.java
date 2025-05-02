@@ -33,11 +33,11 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         Dashbord = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        client = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        vehiculemenu = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -143,17 +143,22 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
                 DashbordMouseClicked(evt);
             }
         });
+        Dashbord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DashbordActionPerformed(evt);
+            }
+        });
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Dashboard_27px.png"))); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(82, 81, 81));
-        jButton1.setText("Client");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        client.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        client.setForeground(new java.awt.Color(82, 81, 81));
+        client.setText("Client");
+        client.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        client.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                clientActionPerformed(evt);
             }
         });
 
@@ -173,10 +178,15 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/reservation_27px.png"))); // NOI18N
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(82, 81, 81));
-        jButton4.setText("Vehicule");
-        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        vehiculemenu.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        vehiculemenu.setForeground(new java.awt.Color(82, 81, 81));
+        vehiculemenu.setText("Vehicule");
+        vehiculemenu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        vehiculemenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vehiculemenuMouseClicked(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Vehicule_27px.png"))); // NOI18N
         jLabel5.setText("jLabel5");
@@ -247,7 +257,7 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(client, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -255,7 +265,7 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(vehiculemenu, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -283,7 +293,7 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
                     .addComponent(Dashbord, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(client, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +301,7 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vehiculemenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -982,9 +992,12 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_DashbordMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void clientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Simple_User_Client p=new Simple_User_Client();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_clientActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -1045,6 +1058,20 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void DashbordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashbordActionPerformed
+        // TODO add your handling code here:
+        Simple_Utilisateur p=new Simple_Utilisateur();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_DashbordActionPerformed
+
+    private void vehiculemenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehiculemenuMouseClicked
+        // TODO add your handling code here:
+        Simple_User_Vehicule p=new Simple_User_Vehicule();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_vehiculemenuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1083,14 +1110,13 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Dashbord;
     private javax.swing.JButton Logout;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton client;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -1115,20 +1141,10 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
@@ -1147,9 +1163,6 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1174,5 +1187,6 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton vehiculemenu;
     // End of variables declaration//GEN-END:variables
 }
