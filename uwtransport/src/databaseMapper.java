@@ -214,19 +214,19 @@ public class databaseMapper {
     //==========================================2.4 SELECT ALL CLIENT ==============================================
     public List<client> select_all_client(){
         List<client> found=new ArrayList<>();
-        String select="SELECT * FROM client";
+        String select="SELECT * FROM client ORDER BY id_client ASC";
         try{
             stmt=con.createStatement();
             rs=stmt.executeQuery(select);
             
             while(rs.next()){
-                int id=rs.getInt("id");
-                String nom=rs.getString("nom");
-                String prenom=rs.getString("prenom");
-                String telephone=rs.getString("telephone");
-                String email=rs.getString("email");
+                int id_client=rs.getInt("id_client");
+                String nom_client=rs.getString("nom_client");
+                String prenom_client=rs.getString("prenom_client");
+                String telephone_client=rs.getString("telephone_client");
+                String email_client=rs.getString("email_client");
                 
-                client display=new client(id,nom,prenom,telephone,email);
+                client display=new client(id_client,nom_client,prenom_client,telephone_client,email_client);
                 found.add(display);
             }
         }catch(SQLException e){
