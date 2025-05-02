@@ -142,7 +142,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jButton5" min="-2" pref="135" max="-2" attributes="0"/>
-                                  <Component id="jButton4" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                                  <Component id="vehiculemenu" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
                                   <Component id="client_menu" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
                                   <Component id="reservation" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                               </Group>
@@ -171,7 +171,7 @@
                       </Group>
                       <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="vehiculemenu" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -289,7 +289,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton4">
+            <Component class="javax.swing.JButton" name="vehiculemenu">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI Black" size="14" style="0"/>
@@ -307,7 +307,8 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="vehiculemenuMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vehiculemenuActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -805,7 +806,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton12" min="-2" pref="135" max="-2" attributes="0"/>
+                                  <Component id="vehiculedashbord" min="-2" pref="135" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
@@ -824,14 +825,14 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="show_vehicule" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButton12" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="vehiculedashbord" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="jButton12">
+                <Component class="javax.swing.JButton" name="vehiculedashbord">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI Black" size="14" style="0"/>
@@ -848,6 +849,9 @@
                       </Border>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="vehiculedashbordMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel13">
                   <Properties>
