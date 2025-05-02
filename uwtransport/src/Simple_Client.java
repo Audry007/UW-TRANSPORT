@@ -4,9 +4,6 @@
  */
 import java.util.List;
 import java.util.Vector;
-import javax.swing.*;
-import java.awt.*;
-import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +25,6 @@ public class Simple_User_Client extends javax.swing.JFrame {
         
         //les differents procedure initial 
         count_all_client();
-        displaypersonne_Client();
     }
 
     //get_count all client
@@ -44,47 +40,6 @@ public class Simple_User_Client extends javax.swing.JFrame {
         telephone.setText("");
         email.setText("");
     }
-    
-    //clear the input for displaying 
-    public void clear(client p){
-        idTxt.setText("");
-        nom.setText("");
-        prenom.setText("");
-        telephone.setText("");
-        email.setText("");
-    }
-    
-    //display in table all clients     
-    public void displaypersonne_Client() {
-        List<client> client = dbm.select_all_client();
-        DefaultTableModel df = (DefaultTableModel) table_client.getModel();
-        df.setRowCount(0);
-
-        Vector v2;
-        for (client p : client) {
-            v2 = new Vector();
-            
-            v2.add(p.getId_client());
-            v2.add(p.getNom_client());
-            v2.add(p.getPrenom_client());
-            v2.add(p.getTelephone_client());
-            v2.add(p.getEmail());
-
-            df.addRow(v2);
-        }
-    }
-    
-    //-------------------procedure permettant de faire rechercher ============================
-    public void Search_CLIENT(String txt){
-        DefaultTableModel model=(DefaultTableModel) table_client.getModel();
-        TableRowSorter<DefaultTableModel> sorter= new TableRowSorter<>(model);
-        table_client.setRowSorter(sorter);
-       
-        sorter.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
-        
-    }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,16 +82,16 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         telephone = new javax.swing.JTextField();
         prenom = new javax.swing.JTextField();
-        idTxt = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
         nom = new javax.swing.JTextField();
-        clear_input = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table_client = new javax.swing.JTable();
-        ButtonSearch = new javax.swing.JButton();
+        jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        texte = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -418,24 +373,19 @@ public class Simple_User_Client extends javax.swing.JFrame {
         prenom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         prenom.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
-        idTxt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        idTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        id.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
         nom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nom.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
-        clear_input.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        clear_input.setForeground(new java.awt.Color(82, 81, 81));
-        clear_input.setText("Clear");
-        clear_input.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        clear_input.addMouseListener(new java.awt.event.MouseAdapter() {
+        clear.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        clear.setForeground(new java.awt.Color(82, 81, 81));
+        clear.setText("Clear");
+        clear.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        clear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clear_inputMouseClicked(evt);
-            }
-        });
-        clear_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clear_inputActionPerformed(evt);
+                clearMouseClicked(evt);
             }
         });
 
@@ -454,7 +404,7 @@ public class Simple_User_Client extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel7Layout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addGap(0, 4, Short.MAX_VALUE)
                                     .addComponent(jLabel12)
                                     .addGap(30, 30, 30))
                                 .addGroup(jPanel7Layout.createSequentialGroup()
@@ -473,14 +423,14 @@ public class Simple_User_Client extends javax.swing.JFrame {
                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(clear_input, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(add_client, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(add_client, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
         jPanel7Layout.setVerticalGroup(
@@ -494,7 +444,7 @@ public class Simple_User_Client extends javax.swing.JFrame {
                         .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -511,18 +461,18 @@ public class Simple_User_Client extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
-                .addGap(26, 26, 26)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(add_client, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clear_input, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                    .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
 
         jPanel8.setBackground(new java.awt.Color(200, 197, 197));
 
-        table_client.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        table_client.setForeground(new java.awt.Color(82, 81, 81));
-        table_client.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(82, 81, 81));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -533,22 +483,12 @@ public class Simple_User_Client extends javax.swing.JFrame {
                 "id_client", "Nom", "Prenom", "Telephone", "Email"
             }
         ));
-        table_client.setToolTipText("");
-        table_client.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table_clientMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(table_client);
+        jTable1.setToolTipText("");
+        jScrollPane1.setViewportView(jTable1);
 
-        ButtonSearch.setBackground(new java.awt.Color(200, 197, 197));
-        ButtonSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
-        ButtonSearch.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        ButtonSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonSearchActionPerformed(evt);
-            }
-        });
+        jButton2.setBackground(new java.awt.Color(200, 197, 197));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
+        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
         jButton11.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jButton11.setForeground(new java.awt.Color(82, 81, 81));
@@ -570,11 +510,11 @@ public class Simple_User_Client extends javax.swing.JFrame {
             }
         });
 
-        texte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        texte.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        texte.addActionListener(new java.awt.event.ActionListener() {
+        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                texteActionPerformed(evt);
+                jTextField6ActionPerformed(evt);
             }
         });
 
@@ -622,9 +562,9 @@ public class Simple_User_Client extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(texte, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17))))
         );
         jPanel8Layout.setVerticalGroup(
@@ -632,8 +572,8 @@ public class Simple_User_Client extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(texte, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(ButtonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -824,9 +764,9 @@ public class Simple_User_Client extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void texteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_texteActionPerformed
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_texteActionPerformed
+    }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void add_clientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_clientMouseClicked
         // TODO add your handling code here:
@@ -853,54 +793,9 @@ public class Simple_User_Client extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_vehiculemenuMouseClicked
 
-    private void table_clientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_clientMouseClicked
+    private void clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseClicked
         // TODO add your handling code here:
-        DefaultTableModel df = (DefaultTableModel) table_client.getModel();
-        int selected = table_client.getSelectedRow();
-        idTxt.setText(df.getValueAt(selected, 0).toString());
-        nom.setText(df.getValueAt(selected, 1).toString());
-        prenom.setText(df.getValueAt(selected, 2).toString());
-        telephone.setText(df.getValueAt(selected, 3).toString());
-        email.setText(df.getValueAt(selected, 4).toString());
-
-        
-        add_client.setEnabled(false);
-        count_all_client();
-    }//GEN-LAST:event_table_clientMouseClicked
-
-    private void clear_inputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clear_inputMouseClicked
-        // TODO add your handling code here:
-        int idT=Integer.parseInt(idTxt.getText());
-        String nomC=nom.getText();
-        String prenomC=prenom.getText();
-        String telephoneC=telephone.getText();
-        String emailC=email.getText();
-        
-        client c=new client(idT,nomC,prenomC,telephoneC,emailC);
-        clear(c);   
-    }//GEN-LAST:event_clear_inputMouseClicked
-
-    private void clear_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clear_inputActionPerformed
-
-    private void ButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSearchActionPerformed
-        // TODO add your handling code here:
-            String txt = sssss.getText();
-            List<client> search = dbm.searchclient(txt);
-
-            // Update table with the results
-            DefaultTableModel df = (DefaultTableModel) table_client.getModel();
-            df.setRowCount(0); // clear previous rows
-              
-            for (client p : search) { 
-                df.addRow(new Object[]{p.getId(), p.getNom(), p.getPrenom()});
-              }
-            
-               // Affiche le nombre de résultats trouvés
-               countSearch.setText("Nombre de résultats : " + personnes.size());
-    }                                         
-    }//GEN-LAST:event_ButtonSearchActionPerformed
+    }//GEN-LAST:event_clearMouseClicked
 
     /**
      * @param args the command line arguments
@@ -938,17 +833,17 @@ public class Simple_User_Client extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ButtonSearch;
     private javax.swing.JButton Dashbord;
     private javax.swing.JButton Logout;
     private javax.swing.JButton add_client;
-    private javax.swing.JButton clear_input;
+    private javax.swing.JButton clear;
     private javax.swing.JLabel count_all;
     private javax.swing.JTextField email;
-    private javax.swing.JTextField idTxt;
+    private javax.swing.JTextField id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -986,12 +881,12 @@ public class Simple_User_Client extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField nom;
     private javax.swing.JTextField prenom;
     private javax.swing.JButton reservation;
-    private javax.swing.JTable table_client;
     private javax.swing.JTextField telephone;
-    private javax.swing.JTextField texte;
     private javax.swing.JButton vehiculemenu;
     // End of variables declaration//GEN-END:variables
 }
