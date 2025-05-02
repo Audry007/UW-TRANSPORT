@@ -84,6 +84,7 @@ public class Simple_User_Client extends javax.swing.JFrame {
         prenom = new javax.swing.JTextField();
         id = new javax.swing.JTextField();
         nom = new javax.swing.JTextField();
+        clear = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -378,6 +379,16 @@ public class Simple_User_Client extends javax.swing.JFrame {
         nom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nom.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
+        clear.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        clear.setForeground(new java.awt.Color(82, 81, 81));
+        clear.setText("Clear");
+        clear.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -415,10 +426,12 @@ public class Simple_User_Client extends javax.swing.JFrame {
                     .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(add_client, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(add_client, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,7 +462,9 @@ public class Simple_User_Client extends javax.swing.JFrame {
                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addGap(27, 27, 27)
-                .addComponent(add_client, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add_client, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -778,6 +793,10 @@ public class Simple_User_Client extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_vehiculemenuMouseClicked
 
+    private void clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clearMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -817,6 +836,7 @@ public class Simple_User_Client extends javax.swing.JFrame {
     private javax.swing.JButton Dashbord;
     private javax.swing.JButton Logout;
     private javax.swing.JButton add_client;
+    private javax.swing.JButton clear;
     private javax.swing.JLabel count_all;
     private javax.swing.JTextField email;
     private javax.swing.JTextField id;
