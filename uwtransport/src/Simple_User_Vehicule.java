@@ -14,6 +14,8 @@ public class Simple_User_Vehicule extends javax.swing.JFrame {
      */
     public Simple_User_Vehicule() {
         initComponents();
+        setTitle("UW-Transport");
+        
     }
 
     /**

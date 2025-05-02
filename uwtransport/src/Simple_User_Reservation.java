@@ -14,6 +14,8 @@ public class Simple_User_Reservation extends javax.swing.JFrame {
      */
     public Simple_User_Reservation() {
         initComponents();
+        setTitle("UW-Transport");
+       
     }
 
     /**
