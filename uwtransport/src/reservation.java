@@ -19,15 +19,28 @@ public class reservation {
     public reservation() {
     }
 
-    public reservation(int id_reservation, String date_reservation, String nom_place, int id_voyage, int id_client, String matricule) {
+    public reservation(int id_reservation, String date_reservation, String nom_place, String matricule, int id_client, int id_voyage) {
         this.id_reservation = id_reservation;
         this.date_reservation = date_reservation;
         this.nom_place = nom_place;
-        this.id_voyage = id_voyage;
-        this.id_client = id_client;
         this.matricule = matricule;
+        this.id_client = id_client;
+        this.id_voyage = id_voyage;
+        
     }
 
+    public reservation(String date_reservation, String nom_place, String matricule, int id_client, int id_voyage) {
+        this.date_reservation = date_reservation;
+        this.nom_place = nom_place;
+        this.matricule = matricule;
+        this.id_client = id_client;
+        this.id_voyage = id_voyage;
+    }
+
+    public reservation(int id_reservation) {
+        this.id_reservation = id_reservation;
+    }
+    
     public reservation(int id_reservation, String date_reservation, String nom_place, String matricule, String email_client) {
         this.id_reservation = id_reservation;
         this.date_reservation = date_reservation;

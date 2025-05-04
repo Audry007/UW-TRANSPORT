@@ -29,8 +29,19 @@ public class vehicule {
         this.status = status;
         this.id_type = id_type;
     }
-    
-    
+
+    public vehicule(String num_matricule, String marque, String capacite, String color, String status, int id_type) {
+        this.num_matricule = num_matricule;
+        this.marque = marque;
+        this.capacite = capacite;
+        this.color = color;
+        this.status = status;
+        this.id_type = id_type;
+    }
+
+    public vehicule(int idvehicule) {
+        this.idvehicule = idvehicule;
+    }
     
     public int getIdvehicule() {
         return idvehicule;

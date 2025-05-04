@@ -3,6 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author audry
@@ -12,12 +19,93 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
     /**
      * Creates new form Simple_User_Chaufeur
      */
+    private databaseMapper dbm;
+    
     public Simple_User_Chaufeur() {
         initComponents();
+        dbm=new databaseMapper();
         setTitle("UW-Transport");
+        count();
+        countvoyage();
+        display_chaufeur();
+        display_voyage();
         
     }
+   
+    //======================== void pour count chaufeur ===============================
+     public void count(){
+         int total=dbm.count_chaufeur();
+         count_chaufeur.setText(""+total+"");
+         found_chau.setText(""+total+"");
+     }
+     
+     //================= void for count voyage ==============================================
+     public void countvoyage(){
+         int total=dbm.count_voyage();
+         count_voyage.setText(""+total+"");
+         found_voyage.setText(""+total+"");
+     }
+     
+     //========================== void pour l'affichage du chaufeur ==========================
+     public void display_chaufeur(){
+        List<chaufeur> found = dbm.get_few_chaufeur();
+        DefaultTableModel df = (DefaultTableModel) table_chaufeur.getModel();
+        df.setRowCount(0);
 
+        Vector v2;
+        for (chaufeur p : found) {
+            v2 = new Vector();
+            
+            v2.add(p.getId_chaufeur());
+            v2.add(p.getNom_chaufeur());
+            v2.add(p.getPrenonm_chaufeur());
+            v2.add(p.getTelephone_chaufeur());
+            v2.add(p.getPermi_conduire());
+
+            df.addRow(v2);
+        }
+
+     }
+     
+    //========================== void pour l'affichage du chaufeur ==========================
+     public void display_voyage(){
+        List<voyage> found = dbm.select_few_voyage_chaufeur();
+        DefaultTableModel df = (DefaultTableModel) table_voyage.getModel();
+        df.setRowCount(0);
+
+        Vector v2;
+        for (voyage p : found) {
+            v2 = new Vector();
+            
+            v2.add(p.getId_voyage());
+            v2.add(p.getNom_voyage());
+            v2.add(p.getDate_voyage());
+            v2.add(p.getPrenom_chaufeur());
+            v2.add(p.getPermi_conduire());
+
+            df.addRow(v2);
+        }
+
+     }
+    
+     //========================== void pour search chaufeur ==========================
+           public void Search_CLIENT(String txt){
+                DefaultTableModel model=(DefaultTableModel) table_chaufeur.getModel();
+                TableRowSorter<DefaultTableModel> sorter= new TableRowSorter<>(model);
+                table_chaufeur.setRowSorter(sorter);
+
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
+           }
+           
+       //========================== void pour search chaufeur ==========================
+           public void Search_voyage(String txt){
+                DefaultTableModel model=(DefaultTableModel) table_voyage.getModel();
+                TableRowSorter<DefaultTableModel> sorter= new TableRowSorter<>(model);
+                table_voyage.setRowSorter(sorter);
+
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
+           }
+           
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,30 +144,30 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton10 = new javax.swing.JButton();
-        jTextField12 = new javax.swing.JTextField();
+        table_voyage = new javax.swing.JTable();
+        search_voyage = new javax.swing.JButton();
+        texte = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        found_voyage = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
+        count_voyage = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jButton15 = new javax.swing.JButton();
-        jTextField13 = new javax.swing.JTextField();
+        table_chaufeur = new javax.swing.JTable();
+        search = new javax.swing.JButton();
+        txt = new javax.swing.JTextField();
         jPanel16 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
+        found_chau = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        count_chaufeur = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
@@ -349,9 +437,9 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(200, 197, 197));
         jPanel9.setPreferredSize(new java.awt.Dimension(450, 299));
 
-        jTable2.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        jTable2.setForeground(new java.awt.Color(82, 81, 81));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        table_voyage.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        table_voyage.setForeground(new java.awt.Color(82, 81, 81));
+        table_voyage.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -362,32 +450,32 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                 "id_Voyage", "Nom_Voyage", "date", "Prenom_Chaufeur", "Permis"
             }
         ));
-        jTable2.setToolTipText("");
-        jScrollPane2.setViewportView(jTable2);
+        table_voyage.setToolTipText("");
+        jScrollPane2.setViewportView(table_voyage);
 
-        jButton10.setBackground(new java.awt.Color(200, 197, 197));
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
-        jButton10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        search_voyage.setBackground(new java.awt.Color(200, 197, 197));
+        search_voyage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
+        search_voyage.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        search_voyage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                search_voyageActionPerformed(evt);
             }
         });
 
-        jTextField12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        texte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        texte.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        texte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                texteActionPerformed(evt);
             }
         });
 
         jLabel23.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jLabel23.setText("Search found :");
 
-        jLabel24.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 51, 0));
-        jLabel24.setText("15");
+        found_voyage.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        found_voyage.setForeground(new java.awt.Color(255, 51, 0));
+        found_voyage.setText("15");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -397,14 +485,14 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(found_voyage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(found_voyage, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel18.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
@@ -416,10 +504,10 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jLabel29.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel29.setText("11");
+        count_voyage.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        count_voyage.setForeground(new java.awt.Color(255, 51, 51));
+        count_voyage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        count_voyage.setText("11");
 
         jLabel30.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(82, 81, 81));
@@ -445,7 +533,7 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(count_voyage, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -456,7 +544,7 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(count_voyage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -481,9 +569,9 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField12)
+                                .addComponent(texte)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(search_voyage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(108, 108, 108)
@@ -497,9 +585,9 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(texte, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(search_voyage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -510,9 +598,9 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
         jPanel10.setBackground(new java.awt.Color(200, 197, 197));
         jPanel10.setPreferredSize(new java.awt.Dimension(450, 299));
 
-        jTable3.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        jTable3.setForeground(new java.awt.Color(82, 81, 81));
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        table_chaufeur.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        table_chaufeur.setForeground(new java.awt.Color(82, 81, 81));
+        table_chaufeur.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -523,32 +611,32 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                 "id_Chaufeur", "Nom", "Prenom", "Telephone", "Pemis_conduire"
             }
         ));
-        jTable3.setToolTipText("");
-        jScrollPane3.setViewportView(jTable3);
+        table_chaufeur.setToolTipText("");
+        jScrollPane3.setViewportView(table_chaufeur);
 
-        jButton15.setBackground(new java.awt.Color(200, 197, 197));
-        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
-        jButton15.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
+        search.setBackground(new java.awt.Color(200, 197, 197));
+        search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
+        search.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                searchActionPerformed(evt);
             }
         });
 
-        jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField13.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        txt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                txtActionPerformed(evt);
             }
         });
 
         jLabel26.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jLabel26.setText("Search found :");
 
-        jLabel27.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(255, 51, 0));
-        jLabel27.setText("15");
+        found_chau.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        found_chau.setForeground(new java.awt.Color(255, 51, 0));
+        found_chau.setText("15");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -558,14 +646,14 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(found_chau, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(found_chau, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel28.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
@@ -577,10 +665,10 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
 
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jLabel33.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel33.setText("11");
+        count_chaufeur.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        count_chaufeur.setForeground(new java.awt.Color(255, 51, 51));
+        count_chaufeur.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        count_chaufeur.setText("11");
 
         jLabel34.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(82, 81, 81));
@@ -605,7 +693,7 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(count_chaufeur, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
@@ -615,7 +703,7 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel33))
+                        .addComponent(count_chaufeur))
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -638,9 +726,9 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                             .addGroup(jPanel10Layout.createSequentialGroup()
                                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField13)
+                                .addComponent(txt)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(108, 108, 108)
@@ -654,9 +742,9 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -736,21 +824,47 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_LogoutMouseClicked
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void search_voyageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_voyageActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+                    String txtt = texte.getText();
+            List<voyage> search = dbm.select_seacrch_voyage_voyage(txtt);
 
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+            // Update table with the results
+            DefaultTableModel df = (DefaultTableModel) table_voyage.getModel();
+            df.setRowCount(0); // clear previous rows
+              
+            for (voyage p : search) { 
+                df.addRow(new Object[]{p.getId_voyage(), p.getNom_voyage(), p.getDate_voyage(),p.getPrenom_chaufeur(),p.getPermi_conduire()});
+              }
+            
+               // Affiche le nombre de résultats trouvés
+               found_voyage.setText("" + search.size()+"");
+    }//GEN-LAST:event_search_voyageActionPerformed
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+    private void texteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_texteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton15ActionPerformed
+    }//GEN-LAST:event_texteActionPerformed
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+            String txtt = txt.getText();
+            List<chaufeur> search = dbm.search_few_chaufeur(txtt);
+
+            // Update table with the results
+            DefaultTableModel df = (DefaultTableModel) table_chaufeur.getModel();
+            df.setRowCount(0); // clear previous rows
+              
+            for (chaufeur p : search) { 
+                df.addRow(new Object[]{p.getId_chaufeur(), p.getNom_chaufeur(), p.getPrenonm_chaufeur(),p.getTelephone_chaufeur(),p.getPermi_conduire()});
+              }
+            
+               // Affiche le nombre de résultats trouvés
+               found_chau.setText("" + search.size()+"");
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -790,10 +904,11 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Dashbord;
     private javax.swing.JButton Logout;
-    private javax.swing.JLabel count_all1;
+    private javax.swing.JLabel count_chaufeur;
+    private javax.swing.JLabel count_voyage;
+    private javax.swing.JLabel found_chau;
+    private javax.swing.JLabel found_voyage;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -806,20 +921,14 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel43;
@@ -832,7 +941,6 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
@@ -843,9 +951,11 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
+    private javax.swing.JButton search;
+    private javax.swing.JButton search_voyage;
+    private javax.swing.JTable table_chaufeur;
+    private javax.swing.JTable table_voyage;
+    private javax.swing.JTextField texte;
+    private javax.swing.JTextField txt;
     // End of variables declaration//GEN-END:variables
 }

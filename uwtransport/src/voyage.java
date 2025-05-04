@@ -38,6 +38,16 @@ public class voyage {
         this.id_trajet = id_trajet;
     }
 
+    public voyage(int id_voyage, String nom_voyage, String date_voyage, String prenom_chaufeur, String permi_conduire) {
+        this.id_voyage = id_voyage;
+        this.nom_voyage = nom_voyage;
+        this.date_voyage = date_voyage;
+        this.prenom_chaufeur = prenom_chaufeur;
+        this.permi_conduire = permi_conduire;
+    }
+
+    
+    
     public voyage(int id_voyage, String nom_voyage, String date_voyage, String nom_chaufeur, String prenom_chaufeur, String permi_conduire) {
         this.id_voyage = id_voyage;
         this.nom_voyage = nom_voyage;
@@ -45,6 +55,12 @@ public class voyage {
         this.nom_chaufeur = nom_chaufeur;
         this.prenom_chaufeur = prenom_chaufeur;
         this.permi_conduire = permi_conduire;
+    }
+
+    public voyage(int id_voyage, String nom_voyage, String nom_chaufeur) {
+        this.id_voyage = id_voyage;
+        this.nom_voyage = nom_voyage;
+        this.nom_chaufeur = nom_chaufeur;
     }
     
     

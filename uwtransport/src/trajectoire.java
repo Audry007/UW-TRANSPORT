@@ -28,6 +28,20 @@ public class trajectoire {
         this.duree_estime = duree_estime;
     }
 
+    public trajectoire(String ville_depart, String ville_arrive, String heure_depart, int prix_trajet, String duree_estime) {
+        this.ville_depart = ville_depart;
+        this.ville_arrive = ville_arrive;
+        this.heure_depart = heure_depart;
+        this.prix_trajet = prix_trajet;
+        this.duree_estime = duree_estime;
+    }
+
+    public trajectoire(int id_trajet) {
+        this.id_trajet = id_trajet;
+    }
+
+     
+    
     public int getId_trajet() {
         return id_trajet;
     }

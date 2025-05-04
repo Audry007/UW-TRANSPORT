@@ -92,14 +92,14 @@ public class databaseMapper {
            stmt=con.createStatement();
            rs=stmt.executeQuery(select);
            while(rs.next()){
-               int id=rs.getInt("id");
-               String nom=rs.getString("nom");
-               String prenom=rs.getString("prenom");
-               String email=rs.getString("email");
-               String telephone=rs.getString("telephone");
-               String permis=rs.getString("permis");
+               int id_chaufeur =rs.getInt("id_chaufeur ");
+               String nom_chaufeur=rs.getString("nom_chaufeur");
+               String prenom_chaufeur=rs.getString("prenom_chaufeur");
+               String email_chaufeur=rs.getString("email_chaufeur");
+               String telephone_chaufeur=rs.getString("telephone_chaufeur");
+               String permis_chaufeur=rs.getString("permis_chaufeur");
                
-               chaufeur charger_chaufeur =new chaufeur(id,nom,prenom,email,telephone,permis);
+               chaufeur charger_chaufeur =new chaufeur(id_chaufeur,nom_chaufeur,prenom_chaufeur,email_chaufeur,telephone_chaufeur,permis_chaufeur);
                chaufeurs.add(charger_chaufeur);
            }
         }catch(SQLException e){
@@ -110,7 +110,61 @@ public class databaseMapper {
         return chaufeurs;
     }
     
-    //=========================1.5 select count chaufeur ==============================================================
+    //===============================1.5 show select chaufeur to chaufeur ==============================================================
+    public List<chaufeur> get_few_chaufeur(){
+        List<chaufeur> chaufeurs=new ArrayList<>();
+        String select="SELECT id_chaufeur,nom_chaufeur,prenom_chaufeur,telephone_chaufeur,permi_conduire FROM chaufeur";
+        try{
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(select);
+           
+           while(rs.next()){
+               int id_chaufeur=rs.getInt("id_chaufeur");
+               String nom_chaufeur=rs.getString("nom_chaufeur");
+               String prenom_chaufeur=rs.getString("prenom_chaufeur");
+               String telephone_chaufeur=rs.getString("telephone_chaufeur");
+               String permi_conduire=rs.getString("permi_conduire");
+               
+               chaufeur charger_chaufeur =new chaufeur(id_chaufeur,nom_chaufeur,prenom_chaufeur,telephone_chaufeur,permi_conduire);
+               chaufeurs.add(charger_chaufeur);
+           }
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+        }
+        
+        
+        return chaufeurs;
+    }
+    
+   //===============================1.6 show select chaufeur to chaufeur ============================================ 
+    public List<chaufeur>  search_few_chaufeur(String text){
+        List<chaufeur> search=new ArrayList<>();
+        String seek="SELECT id_chaufeur,nom_chaufeur,prenom_chaufeur,telephone_chaufeur,permi_conduire FROM chaufeur where nom_chaufeur LIKE ? OR prenom_chaufeur LIke ?";
+        try{
+            pstmt=con.prepareStatement(seek);
+            pstmt.setString(1, "%"+text+"%");
+            pstmt.setString(2, "%"+text+"%");
+            
+            rs=pstmt.executeQuery();
+            
+           while(rs.next()){
+               int id_chaufeur=rs.getInt("id_chaufeur");
+               String nom_chaufeur=rs.getString("nom_chaufeur");
+               String prenom_chaufeur=rs.getString("prenom_chaufeur");
+               String telephone_chaufeur=rs.getString("telephone_chaufeur");
+               String permi_conduire=rs.getString("permi_conduire");
+               
+               chaufeur charger_chaufeur =new chaufeur(id_chaufeur,nom_chaufeur,prenom_chaufeur,telephone_chaufeur,permi_conduire);
+               search.add(charger_chaufeur);
+           }
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+        }
+        
+        return search;
+    }
+    
+    //=========================1.7 select count chaufeur ==============================================================
     public int count_chaufeur(){
         String count="SELECT count(*) as count from chaufeur";
         try{
@@ -126,7 +180,7 @@ public class databaseMapper {
         return 0;
     }
     
-    //==============================1.6 search chaufeur ==============================================================
+    //==============================1.8 search chaufeur ==============================================================
     public List<chaufeur>  searchchaufeur(String text){
         List<chaufeur> search=new ArrayList<>();
         String seek="SELECT * FROM chaufeur where nom_chaufeur LIKE ? OR prenom_chaufeur LIke ?";
@@ -138,14 +192,14 @@ public class databaseMapper {
             rs=pstmt.executeQuery();
             
             while(rs.next()){
-               int id=rs.getInt("id");
+               int id_chaufeur=rs.getInt("id_chaufeur");
                String nom=rs.getString("nom");
                String prenom=rs.getString("prenom");
                String email=rs.getString("email");
                String telephone=rs.getString("telephone");
                String permis=rs.getString("permis");
                
-               chaufeur search_chaufeur =new chaufeur(id,nom,prenom,email,telephone,permis);
+               chaufeur search_chaufeur =new chaufeur(id_chaufeur,nom,prenom,email,telephone,permis);
                search.add(search_chaufeur);
             }
         }catch(SQLException e){
@@ -278,21 +332,21 @@ public class databaseMapper {
     //==============================2.7 search from client ============================================
     public List<client> searchclient(String txt){
         List<client> search=new ArrayList<>();
-        String req="SELECT * FROM client WHERE nom_client LIKE ?,email_client LIKE ?";
+        String req="SELECT * FROM client WHERE nom_client LIKE ? or prenom_client LIKE ?";
         try{
             pstmt=con.prepareStatement(req);
             pstmt.setString(1, "%"+txt+"%");
-            pstmt.setString(2, "%"+txt+"%");
+            pstmt.setString(2,"%"+txt+"%");
             
             rs=pstmt.executeQuery();
             while(rs.next()){
-               int id=rs.getInt("id");
-                String nom=rs.getString("nom");
-                String prenom=rs.getString("prenom");
-                String telephone=rs.getString("telephone");
-                String email=rs.getString("email");
+               int id_client=rs.getInt("id_client");
+                String nom_client=rs.getString("nom_client");
+                String prenom_client=rs.getString("prenom_client");
+                String telephone_client=rs.getString("telephone_client");
+                String email_client=rs.getString("email_client");
                 
-                client display=new client(id,nom,prenom,telephone,email);
+                client display=new client(id_client,nom_client,prenom_client,telephone_client,email_client);
                 search.add(display); 
             }
         }catch(SQLException e){
@@ -448,14 +502,14 @@ public class databaseMapper {
  
  //================================== 4.2 updatereservation ===========================================================
              public int updatereservation(reservation e){
-                String up="UPDATE TABLE reservation SET date_reservation=? ,nom_place=? ,id_voyage=?,id_client=?,matricule=? WHERE id_reservation=?";
+                String up="UPDATE  reservation SET date_reservation=? ,nom_place=?,matricule=?,id_client=?,id_voyage=? WHERE id_reservation=?";
                 try{
                   pstmt=con.prepareStatement(up);
                   pstmt.setString(1, e.getDate_reservation());
                   pstmt.setString(2, e.getNom_place());
-                  pstmt.setInt(3, e.getId_voyage());
-                  pstmt.setInt(4, e.getId_client());
-                  pstmt.setString(5, e.getMatricule());
+                   pstmt.setString(3, e.getMatricule());
+                   pstmt.setInt(4, e.getId_client());
+                  pstmt.setInt(5, e.getId_voyage());
                   pstmt.setInt(6,e.getId_reservation());
 
                   int r=pstmt.executeUpdate();
@@ -491,14 +545,14 @@ public class databaseMapper {
             rs=stmt.executeQuery(get);
             
             while(rs.next()){
-                int id=rs.getInt("id");
-                String data_reservation=rs.getString("data_reservation");
+                int id_reservation =rs.getInt("id_reservation");
+                String date_reservation=rs.getString("date_reservation");
                 String nom_place=rs.getString("nom_place");
-                int id_voyage=rs.getInt("id_voyage");
-                int id_client=rs.getInt("id_client");
-                String matricule=rs.getString("matricule");
+                int id_voyage =rs.getInt("id_voyage");
+                int id_client =rs.getInt("id_client");
+                String matricule =rs.getString("matricule");
                 
-                reservation ge=new reservation(id,data_reservation,nom_place,id_voyage,id_client,matricule);
+                reservation ge=new reservation(id_reservation,date_reservation,nom_place,matricule,id_client,id_voyage);
                 foundnom.add(ge);
             }
         }catch(SQLException e){
@@ -510,21 +564,21 @@ public class databaseMapper {
     //================================= 4.5 search reservation ==========================================================
     public List<reservation> searchreservation(String txt){
         List<reservation> foundnom=new ArrayList<>();
-        String get="SELECT * FROM reservation date_reservation LIKE ? ";
+        String get="SELECT * FROM reservation where date_reservation LIKE ? ";
         try{
             pstmt=con.prepareStatement(get);
             pstmt.setString(1, "%"+txt+"%");
             rs=pstmt.executeQuery();
             
             while(rs.next()){
-                int id=rs.getInt("id");
-                String data_reservation=rs.getString("data_reservation");
+                int id_reservation =rs.getInt("id_reservation");
+                String date_reservation=rs.getString("date_reservation");
                 String nom_place=rs.getString("nom_place");
-                int id_voyage=rs.getInt("id_voyage");
-                int id_client=rs.getInt("id_client");
-                String matricule=rs.getString("matricule");
+                int id_voyage =rs.getInt("id_voyage");
+                int id_client =rs.getInt("id_client");
+                String matricule =rs.getString("matricule");
                 
-                reservation ge=new reservation(id,data_reservation,nom_place,id_voyage,id_client,matricule);
+                reservation ge=new reservation(id_reservation,date_reservation,nom_place,matricule,id_client,id_voyage);
                 foundnom.add(ge);
             }
         }catch(SQLException e){
@@ -888,7 +942,7 @@ public class databaseMapper {
                rs=stmt.executeQuery(select);
                
                while(rs.next()){
-                   int id=rs.getInt("id");
+                   int id_trajet=rs.getInt("id_trajet");
                    String ville_depart=rs.getString("ville_depart");
                    String ville_arrive=rs.getString("ville_arrive");
                    String heure_depart=rs.getString("heure_depart");
@@ -896,7 +950,7 @@ public class databaseMapper {
                    String duree_estime=rs.getString("duree_estime");
                    
                    
-                   trajectoire p=new trajectoire(id,ville_depart,ville_arrive,heure_depart,prix_trajet,duree_estime);
+                   trajectoire p=new trajectoire(id_trajet,ville_depart,ville_arrive,heure_depart,prix_trajet,duree_estime);
                    found_trajet.add(p);
                }
             }catch(SQLException q){
@@ -917,7 +971,7 @@ public class databaseMapper {
                 rs=pstmt.executeQuery();
                 
                while(rs.next()){
-                   int id=rs.getInt("id");
+                   int id_trajet=rs.getInt("id_trajet");
                    String ville_depart=rs.getString("ville_depart");
                    String ville_arrive=rs.getString("ville_arrive");
                    String heure_depart=rs.getString("heure_depart");
@@ -925,7 +979,7 @@ public class databaseMapper {
                    String duree_estime=rs.getString("duree_estime");
                    
                    
-                   trajectoire p=new trajectoire(id,ville_depart,ville_arrive,heure_depart,prix_trajet,duree_estime);
+                   trajectoire p=new trajectoire(id_trajet,ville_depart,ville_arrive,heure_depart,prix_trajet,duree_estime);
                    found_trajet.add(p);
                }
             }catch(SQLException q){
@@ -1020,10 +1074,11 @@ public class databaseMapper {
     //============================================== 8.5 search type_vehicule ================================================
         public List< type_vehicule> search_type_vehicule(String txt){
             List<type_vehicule> found=new ArrayList<>();
-            String select="SELECT * FROM  type_vehicule where nom_type LIKE ?";
+            String select="SELECT * FROM  type_vehicule where nom_type LIKE ? ";
             try{
-               stmt=con.createStatement();
-               rs=stmt.executeQuery(select);
+                pstmt=con.prepareStatement(select);
+                pstmt.setString(1,"%"+txt+"%");
+                rs=pstmt.executeQuery();
                
                while(rs.next()){
                    int id_type=rs.getInt("id_type");
@@ -1230,7 +1285,7 @@ public class databaseMapper {
         }  
     //========================================= 10.3 Delete_vehicule ================================================
         public int delete_vehicule(vehicule t){
-            String del="DELETE FROM utilisateur WHERE idvehicule=?";
+            String del="DELETE FROM vehicule WHERE idvehicule =?";
             try{
                 pstmt=con.prepareStatement(del);
                 pstmt.setInt(1, t.getIdvehicule());
@@ -1252,16 +1307,16 @@ public class databaseMapper {
                rs=stmt.executeQuery(select);
                
                while(rs.next()){
-                   int id=rs.getInt("id");
+                   int idvehicule=rs.getInt("idvehicule");
                    String num_matricule=rs.getString("num_matricule");
                    String marque=rs.getString("marque");
                    String capacite=rs.getString("capacite");
                    String color=rs.getString("color");
                    String status=rs.getString("status");
-                   int id_type =rs.getInt("id_type ");
+                   int id_type=rs.getInt("id_type");
                    
                    
-                   vehicule p=new vehicule(id,num_matricule,marque,capacite,color,status,id_type);
+                   vehicule p=new vehicule(idvehicule,num_matricule,marque,capacite,color,status,id_type);
                    found_trajet.add(p);
                }
             }catch(SQLException q){
@@ -1274,23 +1329,23 @@ public class databaseMapper {
     //================================================= 10.5 search vehicule ============================================
         public List<vehicule> search_vehicule(String txt){
             List<vehicule> found_trajet=new ArrayList<>();
-            String select="SELECT * FROM  vehicule WHERE idvehicule Like ?";
+            String select="SELECT * FROM  vehicule WHERE num_matricule Like ?";
             try{
                 pstmt=con.prepareStatement(select);
                 pstmt.setString(1, "%"+txt+"%");
                 
                 rs=pstmt.executeQuery();
                while(rs.next()){
-                   int id=rs.getInt("id");
+                   int idvehicule=rs.getInt("idvehicule");
                    String num_matricule=rs.getString("num_matricule");
                    String marque=rs.getString("marque");
                    String capacite=rs.getString("capacite");
                    String color=rs.getString("color");
                    String status=rs.getString("status");
-                   int id_type =rs.getInt("id_type ");
+                   int id_type =rs.getInt("id_type");
                    
                    
-                   vehicule p=new vehicule(id,num_matricule,marque,capacite,color,status,id_type);
+                   vehicule p=new vehicule(idvehicule,num_matricule,marque,capacite,color,status,id_type);
                    found_trajet.add(p);
                }
             }catch(SQLException q){
@@ -1381,15 +1436,15 @@ public class databaseMapper {
                rs=stmt.executeQuery(select);
                
                while(rs.next()){
-                   int id=rs.getInt("id");
+                   int id_voyage=rs.getInt("id_voyage");
                    String nom_voyage=rs.getString("nom_voyage");
                    String date_voyage=rs.getString("date_voyage");
                    int idvehicule=rs.getInt("idvehicule");
                    int id_chaufeur =rs.getInt("id_chaufeur");
-                   int id_trajet  =rs.getInt("id_trajet ");
+                   int id_trajet =rs.getInt("id_trajet ");
                    
                    
-                   voyage p=new voyage(id,nom_voyage,date_voyage,idvehicule,id_chaufeur ,id_trajet);
+                   voyage p=new voyage(id_voyage,nom_voyage,date_voyage,idvehicule,id_chaufeur ,id_trajet);
                    found_trajet.add(p);
                }
             }catch(SQLException q){
@@ -1398,6 +1453,34 @@ public class databaseMapper {
             
             return found_trajet;
         }
+     
+        
+     //============================ void pour le select voyage from chaufeur ==================================
+        public List<voyage> select_voyage_chaufeur(){
+            List<voyage> found_trajet=new ArrayList<>();
+            String select="SELECT voyage.id_voyage,voyage.nom_voyage,voyage.date_voyage,chaufeur.prenom_chaufeur,chaufeur.permi_conduire FROM  voyage inner join chaufeur on chaufeur.id_chaufeur=voyage.id_chaufeur";
+            try{
+               stmt=con.createStatement();
+               rs=stmt.executeQuery(select);
+               
+               while(rs.next()){
+                   int id_voyage=rs.getInt("id_voyage");
+                   String nom_voyage=rs.getString("nom_voyage");
+                   String date_voyage=rs.getString("date_voyage");
+                   String prenom_chaufeur=rs.getString("prenom_chaufeur");
+                   String permi_conduire=rs.getString("permi_conduire");
+                   
+                   
+                   voyage p=new voyage(id_voyage,nom_voyage,date_voyage,prenom_chaufeur,permi_conduire);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        }    
+        
         
     //========================================= 11.5 search voyage =======================================================
         public List<voyage> search_voyage(String txt){
@@ -1409,7 +1492,7 @@ public class databaseMapper {
                
                rs=pstmt.executeQuery();
                while(rs.next()){
-                   int id=rs.getInt("id");
+                   int id_voyage=rs.getInt("id_voyage");
                    String nom_voyage=rs.getString("nom_voyage");
                    String date_voyage=rs.getString("date_voyage");
                    int idvehicule=rs.getInt("idvehicule");
@@ -1417,7 +1500,7 @@ public class databaseMapper {
                    int id_trajet  =rs.getInt("id_trajet ");
                    
                    
-                   voyage p=new voyage(id,nom_voyage,date_voyage,idvehicule,id_chaufeur ,id_trajet);
+                   voyage p=new voyage(id_voyage,nom_voyage,date_voyage,idvehicule,id_chaufeur ,id_trajet);
                    found_trajet.add(p);
                }
             }catch(SQLException q){
@@ -1441,26 +1524,98 @@ public class databaseMapper {
                 System.err.println(pp.getMessage());
             }
             return 0;
-        }        
+        }  
+    //================== 1.7 select voyage from reservation =====================================
+        public  List<voyage> select_voyage_reservation(){
+            List<voyage> found=new ArrayList<>();
+            String sql="SELECT id_voyage,nom_voyage,chaufeur.nom_chaufeur from voyage inner join chaufeur on chaufeur.id_chaufeur=voyage.id_chaufeur ";
+            try{
+                stmt=con.createStatement();
+                rs=stmt.executeQuery(sql);
+                
+                while(rs.next()){
+                    int id_voyage=rs.getInt("id_voyage");
+                    String nom_voyage=rs.getString("nom_voyage");
+                    String nom_chaufeur=rs.getString("nom_chaufeur");
+                    
+                    voyage ppp=new voyage(id_voyage,nom_voyage,nom_chaufeur);
+                    found.add(ppp);
+                }
+            }catch(SQLException e){
+                System.err.println(e.getMessage());
+            }
+            return found;
+        }
+        
+    //================== 1.8 select_search voyage from reservation ====================================================
+        public List<voyage> select_seacrch_voyage_reservation(String txt){
+            List<voyage>found= new ArrayList<>();
+            String sql="SELECT id_voyage,nom_voyage,chaufeur.nom_chaufeur from voyage inner join chaufeur on chaufeur.id_chaufeur=voyage.id_chaufeur WHERE nom_voyage LIKE ?";
+            try{
+                pstmt=con.prepareStatement(sql);
+                pstmt.setString(1, "%"+txt+"%");
+                
+                rs=pstmt.executeQuery();
+                while(rs.next()){
+                    int id_voyage=rs.getInt("id_voyage");
+                    String nom_voyage=rs.getString("nom_voyage");
+                    String nom_chaufeur=rs.getString("nom_chaufeur");
+                    
+                    voyage ppp=new voyage(id_voyage,nom_voyage,nom_chaufeur);
+                    found.add(ppp);
+                }
+            
+            }catch(SQLException r){
+                System.err.println(r.getMessage());
+            }
+            return found;
+        }
+
+    //================== 1.9 select_search voyage  voyage from chaufeur ====================================================
+        public List<voyage> select_seacrch_voyage_voyage(String txt){
+            List<voyage>found= new ArrayList<>();
+            String sql="SELECT voyage.id_voyage,voyage.nom_voyage,voyage.date_voyage,chaufeur.prenom_chaufeur,chaufeur.permi_conduire FROM voyage INNER JOIN chaufeur ON chaufeur.id_chaufeur=voyage.id_chaufeur WHERE nom_voyage LIKE ?";
+            try{
+                pstmt=con.prepareStatement(sql);
+                pstmt.setString(1, "%"+txt+"%");
+                
+                rs=pstmt.executeQuery();
+               while(rs.next()){
+                   int id_voyage=rs.getInt("id_voyage");
+                   String nom_voyage=rs.getString("nom_voyage");
+                   String date_voyage=rs.getString("date_voyage");
+                   String prenom_chaufeur=rs.getString("prenom_chaufeur");
+                   String permi_conduire=rs.getString("permi_conduire");
+                   
+                   
+                   voyage p=new voyage(id_voyage,nom_voyage,date_voyage,prenom_chaufeur,permi_conduire);
+                   found.add(p);
+               }
+            
+            }catch(SQLException r){
+                System.err.println(r.getMessage());
+            }
+            return found;
+        }
     
-    //========================================== 11.7 select voyage _chaufeur ============================================
-        public List<voyage> select_voyage_chaufeur(){
+        
+    //========================================== 11.10 select voyage _chaufeur ============================================
+        public List<voyage> select_few_voyage_chaufeur(){
             List<voyage> found_trajet=new ArrayList<>();
-            String select="SELECT voyage.id_voyage,voyage.nom_voyage,voyage.date_voyage,chaufeur.nom_chaufeur,chaufeur.prenom_chaufeur,chaufeur.permi_conduire FROM voyage INNER JOIN chaufeur ON chaufeur.id_chaufeur=voyage.id_chaufeur";
+            String select="SELECT voyage.id_voyage,voyage.nom_voyage,voyage.date_voyage,chaufeur.prenom_chaufeur,chaufeur.permi_conduire FROM voyage INNER JOIN chaufeur ON chaufeur.id_chaufeur=voyage.id_chaufeur";
             try{
                stmt=con.createStatement();
                rs=stmt.executeQuery(select);
                
                while(rs.next()){
-                   int id=rs.getInt("id");
+                   int id_voyage=rs.getInt("id_voyage");
                    String nom_voyage=rs.getString("nom_voyage");
                    String date_voyage=rs.getString("date_voyage");
-                   String nom_chaufeur=rs.getString("nom_chaufeur");
                    String prenom_chaufeur=rs.getString("prenom_chaufeur");
                    String permi_conduire=rs.getString("permi_conduire");
                    
                    
-                   voyage p=new voyage(id,nom_voyage,date_voyage,nom_chaufeur,prenom_chaufeur,permi_conduire);
+                   voyage p=new voyage(id_voyage,nom_voyage,date_voyage,prenom_chaufeur,permi_conduire);
                    found_trajet.add(p);
                }
             }catch(SQLException q){

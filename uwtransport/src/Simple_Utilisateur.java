@@ -832,16 +832,16 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
 
     private void client_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_client_menuMouseClicked
         // TODO add your handling code here:
-        Simple_User_Client p=new Simple_User_Client();
-        p.setVisible(true);
-        this.dispose();
+//        Simple_User_Client p=new Simple_User_Client();
+//        p.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_client_menuMouseClicked
 
     private void client2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_client2MouseClicked
         // TODO add your handling code here:
-        Simple_User_Client p=new Simple_User_Client();
-        p.setVisible(true);
-        this.dispose();
+//        Simple_User_Client p=new Simple_User_Client();
+//        p.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_client2MouseClicked
 
     private void reservationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservationMouseClicked
