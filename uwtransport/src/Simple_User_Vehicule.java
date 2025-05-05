@@ -72,7 +72,7 @@ public class Simple_User_Vehicule extends javax.swing.JFrame {
         
         sorter.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
     }
-    
+    //=========================----------------------------------------------------
     //=================== void pour afficher vehicule ============================
     public void display(){
         List<vehicule> found = dbm.select_vehicule();
@@ -95,7 +95,7 @@ public class Simple_User_Vehicule extends javax.swing.JFrame {
 
       }
     }
-  
+  //================================================================================================
     //============================ void display type_vehicule ===================================
      public void display_type(){   
         List<type_vehicule> found = dbm.select_type_vehicule();
