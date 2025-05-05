@@ -1402,7 +1402,7 @@ private databaseMapper dbm;
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
-        
+                 
         if(dbm.deletereservation(del)>0){
             JOptionPane.showMessageDialog(rootPane, "Reservation of"+" "+date1+" "+"is deleted very well!");
             display();

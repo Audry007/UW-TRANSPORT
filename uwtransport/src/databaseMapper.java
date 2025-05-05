@@ -110,7 +110,7 @@ public class databaseMapper {
         return chaufeurs;
     }
     
-    //===============================1.5 show select chaufeur to chaufeur ==============================================================
+    //===============================1.5 show select chaufeur to voyage ==============================================================
     public List<chaufeur> get_few_chaufeur(){
         List<chaufeur> chaufeurs=new ArrayList<>();
         String select="SELECT id_chaufeur,nom_chaufeur,prenom_chaufeur,telephone_chaufeur,permi_conduire FROM chaufeur";
@@ -1326,7 +1326,33 @@ public class databaseMapper {
             return found_trajet;
         }
         
-    //================================================= 10.5 search vehicule ============================================
+    //================================================ 10.5 select vehicule to voyage==========================================
+        public List<vehicule> select_vehicule_voyage(){
+            List<vehicule> found_trajet=new ArrayList<>();
+            String select="SELECT * FROM  vehicule";
+            try{
+               stmt=con.createStatement();
+               rs=stmt.executeQuery(select);
+               
+               while(rs.next()){
+                   int idvehicule=rs.getInt("idvehicule");
+                   String num_matricule=rs.getString("num_matricule");
+                   String marque=rs.getString("marque");
+                   String capacite=rs.getString("capacite");
+                   String status=rs.getString("status");
+                   
+                   
+                   vehicule p=new vehicule(idvehicule,num_matricule,marque,capacite,status);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        }
+        
+    //================================================= 10.6 search vehicule ============================================
         public List<vehicule> search_vehicule(String txt){
             List<vehicule> found_trajet=new ArrayList<>();
             String select="SELECT * FROM  vehicule WHERE num_matricule Like ?";
@@ -1355,7 +1381,34 @@ public class databaseMapper {
             return found_trajet;
         } 
         
-    //============================================== 10.6 count vehicule ===============================================
+    //================================================= 10.7 search vehicule ============================================
+        public List<vehicule> search_vehicule_voyage(String txt){
+            List<vehicule> found_trajet=new ArrayList<>();
+            String select="SELECT * FROM  vehicule WHERE num_matricule Like ?";
+            try{
+                pstmt=con.prepareStatement(select);
+                pstmt.setString(1, "%"+txt+"%");
+                
+                rs=pstmt.executeQuery();
+               while(rs.next()){
+                   int idvehicule=rs.getInt("idvehicule");
+                   String num_matricule=rs.getString("num_matricule");
+                   String marque=rs.getString("marque");
+                   String capacite=rs.getString("capacite");
+                   String status=rs.getString("status");
+                   
+                   
+                   vehicule p=new vehicule(idvehicule,num_matricule,marque,capacite,status);
+                   found_trajet.add(p);
+               }
+            }catch(SQLException q){
+                System.err.println(q.getMessage());
+            }
+            
+            return found_trajet;
+        }
+        
+    //============================================== 10.8 count vehicule ===============================================
         public int count_vehicule(){
             String p="SELECT count(*) FROM vehicule";
             try{
@@ -1441,7 +1494,7 @@ public class databaseMapper {
                    String date_voyage=rs.getString("date_voyage");
                    int idvehicule=rs.getInt("idvehicule");
                    int id_chaufeur =rs.getInt("id_chaufeur");
-                   int id_trajet =rs.getInt("id_trajet ");
+                   int id_trajet =rs.getInt("id_trajet");
                    
                    
                    voyage p=new voyage(id_voyage,nom_voyage,date_voyage,idvehicule,id_chaufeur ,id_trajet);
@@ -1497,7 +1550,7 @@ public class databaseMapper {
                    String date_voyage=rs.getString("date_voyage");
                    int idvehicule=rs.getInt("idvehicule");
                    int id_chaufeur =rs.getInt("id_chaufeur");
-                   int id_trajet  =rs.getInt("id_trajet ");
+                   int id_trajet  =rs.getInt("id_trajet");
                    
                    
                    voyage p=new voyage(id_voyage,nom_voyage,date_voyage,idvehicule,id_chaufeur ,id_trajet);

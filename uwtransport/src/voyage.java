@@ -46,6 +46,10 @@ public class voyage {
         this.permi_conduire = permi_conduire;
     }
 
+    public voyage(int id_voyage) {
+        this.id_voyage = id_voyage;
+    }
+
     
     
     public voyage(int id_voyage, String nom_voyage, String date_voyage, String nom_chaufeur, String prenom_chaufeur, String permi_conduire) {
