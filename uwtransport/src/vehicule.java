@@ -39,6 +39,16 @@ public class vehicule {
         this.id_type = id_type;
     }
 
+    public vehicule(int idvehicule, String num_matricule, String marque, String capacite, String status) {
+        this.idvehicule = idvehicule;
+        this.num_matricule = num_matricule;
+        this.marque = marque;
+        this.capacite = capacite;
+        this.status = status;
+    }
+
+    
+    
     public vehicule(int idvehicule) {
         this.idvehicule = idvehicule;
     }
