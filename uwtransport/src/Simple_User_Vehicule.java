@@ -525,13 +525,13 @@ public class Simple_User_Vehicule extends javax.swing.JFrame {
         table_vehicule.setForeground(new java.awt.Color(82, 81, 81));
         table_vehicule.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "Num_matriculation", "Marque", "Capacite", "Nom_type"
+                "id", "Num_matriculation", "Marque", "Capacite", "Nom_type", "Status", "Id_type"
             }
         ));
         table_vehicule.setToolTipText("");
