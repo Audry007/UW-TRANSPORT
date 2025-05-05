@@ -3,81 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-import java.util.List;
-import java.util.Vector;
-import javax.swing.JOptionPane;
-import javax.swing.RowFilter;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
-
 /**
  *
  * @author audry
  */
-public class Simple_User_Trajectoire extends javax.swing.JFrame {
+public class Simple_User_Client extends javax.swing.JFrame {
 
     /**
-     * Creates new form Simple_User_Trajectoire
+     * Creates new form Simple_User_Client
      */
-    
-    private databaseMapper dbm;
-    
-    public Simple_User_Trajectoire() {
+    public Simple_User_Client() {
         initComponents();
-        dbm=new databaseMapper();
-         setTitle("UW-Transport");
-         
-         count();
-         display();
+        setTitle("UW-Transport");
     }
 
-    //================= void pour count trajectoire =============================
-    public void count(){
-        int tot=dbm.count_trajectoire();
-        search_found.setText(""+tot+"");
-        count_traj.setText(""+tot+"");
-    }
-    
-    //==================== void pour display trajectoire ===========================
-    public void display(){
-        List<trajectoire> found = dbm.select_trajectoire();
-        DefaultTableModel df = (DefaultTableModel) table_traj.getModel();
-        df.setRowCount(0);
-
-        Vector v2;
-        for (trajectoire p : found) {
-            v2 = new Vector();
-            
-            v2.add(p.getId_trajet());
-            v2.add(p.getVille_depart());
-            v2.add(p.getVille_arrive());
-            v2.add(p.getHeure_depart());
-            v2.add(p.getPrix_trajet());
-            v2.add(p.getDuree_estime());
-
-            df.addRow(v2);
-
-      }
-    }
-    
-    //====================== void pour search trajectoire =============================
-        public void Search_trajectoire(String txt){
-            DefaultTableModel model=(DefaultTableModel) table_traj.getModel();
-            TableRowSorter<DefaultTableModel> sorter= new TableRowSorter<>(model);
-            table_traj.setRowSorter(sorter);
-
-            sorter.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
-        }
-        
-    //======================== void for clearInput ====================================
-        public void clearInput(trajectoire p){
-            id.setText("");
-            ville_d.setText("");
-            ville_a.setText("");
-            heure.setText("");
-            prix.setText("");
-            duree.setText("");
-        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,15 +74,13 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
         ville_a = new javax.swing.JTextField();
         id = new javax.swing.JTextField();
         ville_d = new javax.swing.JTextField();
-        duree = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
         clear = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         count_traj = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -361,7 +298,7 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Segoe UI Black", 0, 40)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(34, 97, 168));
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel27.setText("Trajectoire Interface");
+        jLabel27.setText("Client Interface");
 
         Logout.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         Logout.setForeground(new java.awt.Color(82, 81, 81));
@@ -382,7 +319,7 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -410,13 +347,13 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
         table_traj.setForeground(new java.awt.Color(82, 81, 81));
         table_traj.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "id", "Ville_depart", "Ville_arrive", "Heure_depart", "Prix_trajet", "Duree_estime"
+                "id_Client", "Nom_Client", "Prenom_Client"
             }
         ));
         table_traj.setToolTipText("");
@@ -545,12 +482,12 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(82, 81, 81));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("Formulaire Des Trajectoire");
+        jLabel18.setText("Formulaire Des Client");
 
         jLabel19.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(82, 81, 81));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("id");
+        jLabel19.setText("id_Client");
 
         prix.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         prix.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
@@ -573,17 +510,17 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(82, 81, 81));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Ville_dep");
+        jLabel20.setText("Nom_Client");
 
         jLabel23.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(82, 81, 81));
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel23.setText("Ville_ar");
+        jLabel23.setText("Prenom_Client");
 
         jLabel24.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(82, 81, 81));
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("Heure_dep");
+        jLabel24.setText("Telephone");
 
         heure.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         heure.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
@@ -593,22 +530,24 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
 
         id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         id.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idActionPerformed(evt);
+            }
+        });
 
         ville_d.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ville_d.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-
-        duree.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        duree.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        ville_d.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ville_dActionPerformed(evt);
+            }
+        });
 
         jLabel25.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(82, 81, 81));
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("Prix_traj");
-
-        jLabel26.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(82, 81, 81));
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel26.setText("Duree_estime");
+        jLabel25.setText("Email");
 
         clear.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         clear.setForeground(new java.awt.Color(82, 81, 81));
@@ -627,69 +566,74 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel20)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel25)
-                            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(8, 8, 8)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(duree, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(prix, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ville_d, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ville_a, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(heure, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel20)
+                                    .addComponent(jLabel24)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel25))
+                                .addGap(21, 21, 21))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(clear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ville_a, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(heure, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ville_d, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(prix, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ville_d, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addGap(12, 12, 12)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ville_a, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(heure, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prix, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel25))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(duree, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel26))
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ville_d, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ville_a, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(heure, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(prix, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
         jPanel15.setBackground(new java.awt.Color(200, 197, 197));
@@ -704,10 +648,10 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
         jLabel30.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(82, 81, 81));
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel30.setText("Trajectoire");
+        jLabel30.setText("Client");
 
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Trajectoire_27px.png"))); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Client_27px.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -721,7 +665,7 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
                         .addGap(195, 195, 195))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
@@ -739,7 +683,7 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
                             .addComponent(count_traj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -826,9 +770,96 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_LogoutMouseClicked
 
+    private void table_trajMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_trajMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel df = (DefaultTableModel) table_traj.getModel();
+        int selected = table_traj.getSelectedRow();
+        id.setText(df.getValueAt(selected, 0).toString());
+        ville_d.setText(df.getValueAt(selected, 1).toString());
+        ville_a.setText(df.getValueAt(selected, 2).toString());
+        heure.setText(df.getValueAt(selected, 3).toString());
+        prix.setText(df.getValueAt(selected, 4).toString());
+        duree.setText(df.getValueAt(selected, 5).toString());
+
+        add.setVisible(false);
+        display();
+        count();
+    }//GEN-LAST:event_table_trajMouseClicked
+
+    private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
+        // TODO add your handling code here:
+        String txtt = search1.getText();
+        List<trajectoire> search = dbm.search_trajectoire(txtt);
+
+        // Update table with the results
+        DefaultTableModel df = (DefaultTableModel) table_traj.getModel();
+        df.setRowCount(0); // clear previous rows
+
+        for (trajectoire p : search) {
+            df.addRow(new Object[]{p.getId_trajet(), p.getVille_depart(), p.getVille_arrive(),p.getHeure_depart(),p.getPrix_trajet(),p.getDuree_estime()});
+        }
+
+        // Affiche le nombre de résultats trouvés
+        search_found.setText("" + search.size()+"");
+    }//GEN-LAST:event_searchMouseClicked
+
+    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+        // TODO add your handling code here:
+        int idd=Integer.parseInt(id.getText());
+        String date1=ville_d.getText();
+        String dest=ville_a.getText();
+
+        trajectoire del=new trajectoire(idd);
+
+        int confirm = JOptionPane.showConfirmDialog(
+            rootPane,
+            "Do you want to delete this Trajectory ?",
+            "Confirmation",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+
+            if(dbm.delete_trajectoire(del)>0){
+                JOptionPane.showMessageDialog(rootPane, "Trajectory from"+" "+date1+" to "+dest+"is deleted very well!");
+                display();
+                count();
+                clearInput(del);
+                add.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Reservation not deleted try again!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "you refused to delete Trajectory from"+" "+date1+" "+"to "+dest);
+        }
+    }//GEN-LAST:event_deleteMouseClicked
+
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteActionPerformed
+
+    private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
+        // TODO add your handling code here:
+        int idd=Integer.parseInt(id.getText());
+        String ville_de=ville_d.getText();
+        String ville_ar=ville_a.getText();
+        String heure_de=heure.getText();
+        int prix_t=Integer.parseInt(prix.getText());
+        String duree_e=duree.getText();
+
+        trajectoire addd=new trajectoire(idd,ville_de,ville_ar,heure_de,prix_t,duree_e);
+
+        if(dbm.update_trajectoire(addd)>0){
+            JOptionPane.showMessageDialog(rootPane, "Trajectory is updated very well");
+            count();
+            display();
+            clearInput(addd);
+            add.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Trajectory isn't updated very well try again");
+        }
+
+    }//GEN-LAST:event_updateMouseClicked
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
@@ -842,23 +873,6 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_prixActionPerformed
 
-    private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
-        // TODO add your handling code here:
-         String txtt = search1.getText();
-            List<trajectoire> search = dbm.search_trajectoire(txtt);
-
-            // Update table with the results
-            DefaultTableModel df = (DefaultTableModel) table_traj.getModel();
-            df.setRowCount(0); // clear previous rows
-              
-            for (trajectoire p : search) { 
-                df.addRow(new Object[]{p.getId_trajet(), p.getVille_depart(), p.getVille_arrive(),p.getHeure_depart(),p.getPrix_trajet(),p.getDuree_estime()});
-              }
-            
-               // Affiche le nombre de résultats trouvés
-               search_found.setText("" + search.size()+"");
-    }//GEN-LAST:event_searchMouseClicked
-
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
         // TODO add your handling code here:
         String ville_de=ville_d.getText();
@@ -866,17 +880,17 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
         String heure_de=heure.getText();
         int prix_t=Integer.parseInt(prix.getText());
         String duree_e=duree.getText();
-        
+
         trajectoire add=new trajectoire(ville_de,ville_ar,heure_de,prix_t,duree_e);
-        
+
         if(ville_de.isEmpty()&&ville_ar.isEmpty()&&heure_de.isEmpty()&&duree_e.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "The inputs are requide");
         }else{
             if(dbm.addtrajectoire(add)>0){
-               JOptionPane.showMessageDialog(rootPane, "Trajectory is added very well");  
-               count();
-               display();
-               clearInput(add);
+                JOptionPane.showMessageDialog(rootPane, "Trajectory is added very well");
+                count();
+                display();
+                clearInput(add);
             }else{
                 JOptionPane.showMessageDialog(rootPane, "Trajectory isn't added very well try again");
             }
@@ -891,82 +905,20 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
         String heure_de=heure.getText();
         int prix_t=Integer.parseInt(prix.getText());
         String duree_e=duree.getText();
-        
+
         trajectoire addd=new trajectoire(iddd,ville_de,ville_ar,heure_de,prix_t,duree_e);
         clearInput(addd);
-        
+
         add.setVisible(true);
     }//GEN-LAST:event_clearMouseClicked
 
-    private void table_trajMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_trajMouseClicked
+    private void ville_dActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ville_dActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel df = (DefaultTableModel) table_traj.getModel();
-        int selected = table_traj.getSelectedRow();
-        id.setText(df.getValueAt(selected, 0).toString());
-        ville_d.setText(df.getValueAt(selected, 1).toString());
-        ville_a.setText(df.getValueAt(selected, 2).toString());
-        heure.setText(df.getValueAt(selected, 3).toString());
-        prix.setText(df.getValueAt(selected, 4).toString());
-        duree.setText(df.getValueAt(selected, 5).toString());
-        
-        add.setVisible(false);
-        display();
-        count();
-    }//GEN-LAST:event_table_trajMouseClicked
+    }//GEN-LAST:event_ville_dActionPerformed
 
-    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
         // TODO add your handling code here:
-        int idd=Integer.parseInt(id.getText());
-        String date1=ville_d.getText();
-        String dest=ville_a.getText();
-       
-        trajectoire del=new trajectoire(idd);
-       
-            int confirm = JOptionPane.showConfirmDialog(
-            rootPane,
-            "Do you want to delete this Trajectory ?",
-            "Confirmation",
-            JOptionPane.YES_NO_OPTION
-        );
-
-        if (confirm == JOptionPane.YES_OPTION) {
-        
-        if(dbm.delete_trajectoire(del)>0){
-            JOptionPane.showMessageDialog(rootPane, "Trajectory from"+" "+date1+" to "+dest+"is deleted very well!");
-            display();
-            count();
-            clearInput(del);
-            add.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Reservation not deleted try again!");
-          }
-      }else{
-           JOptionPane.showMessageDialog(rootPane, "you refused to delete Trajectory from"+" "+date1+" "+"to "+dest); 
-        }
-    }//GEN-LAST:event_deleteMouseClicked
-
-    private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
-        // TODO add your handling code here:
-        int idd=Integer.parseInt(id.getText());
-        String ville_de=ville_d.getText();
-        String ville_ar=ville_a.getText();
-        String heure_de=heure.getText();
-        int prix_t=Integer.parseInt(prix.getText());
-        String duree_e=duree.getText();
-        
-        trajectoire addd=new trajectoire(idd,ville_de,ville_ar,heure_de,prix_t,duree_e);
- 
-            if(dbm.update_trajectoire(addd)>0){
-               JOptionPane.showMessageDialog(rootPane, "Trajectory is updated very well");  
-               count();
-               display();
-               clearInput(addd);
-               add.setVisible(true);
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Trajectory isn't updated very well try again");
-            }
-        
-    }//GEN-LAST:event_updateMouseClicked
+    }//GEN-LAST:event_idActionPerformed
 
     /**
      * @param args the command line arguments
@@ -985,20 +937,20 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Simple_User_Trajectoire.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simple_User_Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Simple_User_Trajectoire.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simple_User_Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Simple_User_Trajectoire.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simple_User_Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Simple_User_Trajectoire.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simple_User_Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Simple_User_Trajectoire().setVisible(true);
+                new Simple_User_Client().setVisible(true);
             }
         });
     }
@@ -1010,7 +962,6 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
     private javax.swing.JButton clear;
     private javax.swing.JLabel count_traj;
     private javax.swing.JButton delete;
-    private javax.swing.JTextField duree;
     private javax.swing.JTextField heure;
     private javax.swing.JTextField id;
     private javax.swing.JButton jButton1;
@@ -1022,6 +973,7 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1030,12 +982,10 @@ public class Simple_User_Trajectoire extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel5;

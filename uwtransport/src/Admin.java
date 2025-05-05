@@ -14,6 +14,8 @@ public class Admin extends javax.swing.JFrame {
      */
     public Admin() {
         initComponents();
+        setTitle("UW-Transport");
+        this.setResizable( false);
     }
 
     /**
