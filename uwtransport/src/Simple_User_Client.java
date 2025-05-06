@@ -2,21 +2,78 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author audry
  */
+
 public class Simple_User_Client extends javax.swing.JFrame {
 
     /**
      * Creates new form Simple_User_Client
      */
+    private databaseMapper dbm;
     public Simple_User_Client() {
         initComponents();
+        dbm=new databaseMapper();
         setTitle("UW-Transport");
+        
+        count_all_client();
+        displaypersonne_Client();
     }
 
+    //get_count all client
+    public void count_all_client(){
+       int total_get=dbm.countclient();
+       count_all.setText(""+total_get+"");
+       search_found.setText(""+total_get+"");
+    }
+    
+    //clear input in adding
+    public void clearInput(client p){
+        idTxt.setText("");
+        nom.setText("");
+        prenom.setText("");
+        telephone.setText("");
+        email.setText("");
+    }
+    
+    //display in table all clients     
+    public void displaypersonne_Client() {
+        List<client> client = dbm.select_all_client();
+        DefaultTableModel df = (DefaultTableModel) table_client.getModel();
+        df.setRowCount(0);
+
+        Vector v2;
+        for (client p : client) {
+            v2 = new Vector();
+            
+            v2.add(p.getId_client());
+            v2.add(p.getNom_client());
+            v2.add(p.getPrenom_client());
+            v2.add(p.getTelephone_client());
+            v2.add(p.getEmail());
+
+            df.addRow(v2);
+        }
+    }
+    
+    //-------------------procedure permettant de faire rechercher ============================
+    public void Search_CLIENT(String txt){
+        DefaultTableModel model=(DefaultTableModel) table_client.getModel();
+        TableRowSorter<DefaultTableModel> sorter= new TableRowSorter<>(model);
+        table_client.setRowSorter(sorter);
+       
+        sorter.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,31 +111,31 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table_traj = new javax.swing.JTable();
+        table_client = new javax.swing.JTable();
         search = new javax.swing.JButton();
         delete = new javax.swing.JButton();
         update = new javax.swing.JButton();
-        search1 = new javax.swing.JTextField();
+        sssss = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         search_found = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        prix = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         add = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        heure = new javax.swing.JTextField();
-        ville_a = new javax.swing.JTextField();
-        id = new javax.swing.JTextField();
-        ville_d = new javax.swing.JTextField();
+        telephone = new javax.swing.JTextField();
+        prenom = new javax.swing.JTextField();
+        idTxt = new javax.swing.JTextField();
+        nom = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         clear = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
-        count_traj = new javax.swing.JLabel();
+        count_all = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
@@ -343,26 +400,26 @@ public class Simple_User_Client extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(200, 197, 197));
 
-        table_traj.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        table_traj.setForeground(new java.awt.Color(82, 81, 81));
-        table_traj.setModel(new javax.swing.table.DefaultTableModel(
+        table_client.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        table_client.setForeground(new java.awt.Color(82, 81, 81));
+        table_client.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "id_Client", "Nom_Client", "Prenom_Client"
+                "id_Client", "Nom_Client", "Prenom_Client", "Telephone", "Email"
             }
         ));
-        table_traj.setToolTipText("");
-        table_traj.addMouseListener(new java.awt.event.MouseAdapter() {
+        table_client.setToolTipText("");
+        table_client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table_trajMouseClicked(evt);
+                table_clientMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(table_traj);
+        jScrollPane1.setViewportView(table_client);
 
         search.setBackground(new java.awt.Color(200, 197, 197));
         search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
@@ -370,6 +427,11 @@ public class Simple_User_Client extends javax.swing.JFrame {
         search.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 searchMouseClicked(evt);
+            }
+        });
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
             }
         });
 
@@ -403,11 +465,11 @@ public class Simple_User_Client extends javax.swing.JFrame {
             }
         });
 
-        search1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        search1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        search1.addActionListener(new java.awt.event.ActionListener() {
+        sssss.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        sssss.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        sssss.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                search1ActionPerformed(evt);
+                sssssActionPerformed(evt);
             }
         });
 
@@ -455,7 +517,7 @@ public class Simple_User_Client extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                         .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(search1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sssss, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
@@ -465,7 +527,7 @@ public class Simple_User_Client extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(search1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(sssss, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
@@ -489,11 +551,11 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("id_Client");
 
-        prix.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        prix.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        prix.addActionListener(new java.awt.event.ActionListener() {
+        email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        email.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prixActionPerformed(evt);
+                emailActionPerformed(evt);
             }
         });
 
@@ -522,25 +584,25 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("Telephone");
 
-        heure.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        heure.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        telephone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        telephone.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
-        ville_a.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        ville_a.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        prenom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        prenom.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
 
-        id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        id.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        id.addActionListener(new java.awt.event.ActionListener() {
+        idTxt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        idTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        idTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idActionPerformed(evt);
+                idTxtActionPerformed(evt);
             }
         });
 
-        ville_d.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        ville_d.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
-        ville_d.addActionListener(new java.awt.event.ActionListener() {
+        nom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nom.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        nom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ville_dActionPerformed(evt);
+                nomActionPerformed(evt);
             }
         });
 
@@ -556,6 +618,11 @@ public class Simple_User_Client extends javax.swing.JFrame {
         clear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clearMouseClicked(evt);
+            }
+        });
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
             }
         });
 
@@ -583,21 +650,21 @@ public class Simple_User_Client extends javax.swing.JFrame {
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel14Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ville_a, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(heure, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ville_d, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(prix, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addContainerGap()
@@ -612,23 +679,23 @@ public class Simple_User_Client extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ville_d, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ville_a, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(prenom, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(heure, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(telephone, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(prix, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                    .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -640,10 +707,10 @@ public class Simple_User_Client extends javax.swing.JFrame {
 
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        count_traj.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        count_traj.setForeground(new java.awt.Color(255, 51, 51));
-        count_traj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        count_traj.setText("11");
+        count_all.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        count_all.setForeground(new java.awt.Color(255, 51, 51));
+        count_all.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        count_all.setText("11");
 
         jLabel30.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(82, 81, 81));
@@ -657,19 +724,18 @@ public class Simple_User_Client extends javax.swing.JFrame {
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+            .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jLabel28)
-                        .addGap(195, 195, 195))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel28))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(count_traj, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(count_all, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
@@ -680,7 +746,7 @@ public class Simple_User_Client extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(count_traj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(count_all, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -770,60 +836,46 @@ public class Simple_User_Client extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_LogoutMouseClicked
 
-    private void table_trajMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_trajMouseClicked
+    private void table_clientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_clientMouseClicked
         // TODO add your handling code here:
-        DefaultTableModel df = (DefaultTableModel) table_traj.getModel();
-        int selected = table_traj.getSelectedRow();
-        id.setText(df.getValueAt(selected, 0).toString());
-        ville_d.setText(df.getValueAt(selected, 1).toString());
-        ville_a.setText(df.getValueAt(selected, 2).toString());
-        heure.setText(df.getValueAt(selected, 3).toString());
-        prix.setText(df.getValueAt(selected, 4).toString());
-        duree.setText(df.getValueAt(selected, 5).toString());
+        DefaultTableModel df = (DefaultTableModel) table_client.getModel();
+        int selected = table_client.getSelectedRow();
+        idTxt.setText(df.getValueAt(selected, 0).toString());
+        nom.setText(df.getValueAt(selected, 1).toString());
+        prenom.setText(df.getValueAt(selected, 2).toString());
+        telephone.setText(df.getValueAt(selected, 3).toString());
+        email.setText(df.getValueAt(selected, 4).toString());
 
-        add.setVisible(false);
-        display();
-        count();
-    }//GEN-LAST:event_table_trajMouseClicked
+        add.setVisible(false);      
+        count_all_client();
+        displaypersonne_Client();
+    }//GEN-LAST:event_table_clientMouseClicked
 
     private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
         // TODO add your handling code here:
-        String txtt = search1.getText();
-        List<trajectoire> search = dbm.search_trajectoire(txtt);
-
-        // Update table with the results
-        DefaultTableModel df = (DefaultTableModel) table_traj.getModel();
-        df.setRowCount(0); // clear previous rows
-
-        for (trajectoire p : search) {
-            df.addRow(new Object[]{p.getId_trajet(), p.getVille_depart(), p.getVille_arrive(),p.getHeure_depart(),p.getPrix_trajet(),p.getDuree_estime()});
-        }
-
-        // Affiche le nombre de résultats trouvés
-        search_found.setText("" + search.size()+"");
     }//GEN-LAST:event_searchMouseClicked
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
         // TODO add your handling code here:
-        int idd=Integer.parseInt(id.getText());
-        String date1=ville_d.getText();
-        String dest=ville_a.getText();
+        int idd=Integer.parseInt(idTxt.getText());
+        String date1=nom.getText();
+        String dest=prenom.getText();
 
-        trajectoire del=new trajectoire(idd);
+        client del=new client(idd);
 
         int confirm = JOptionPane.showConfirmDialog(
             rootPane,
-            "Do you want to delete this Trajectory ?",
+            "Do you want to delete this Client ?",
             "Confirmation",
             JOptionPane.YES_NO_OPTION
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
 
-            if(dbm.delete_trajectoire(del)>0){
+            if(dbm.deleteclient(del)>0){
                 JOptionPane.showMessageDialog(rootPane, "Trajectory from"+" "+date1+" to "+dest+"is deleted very well!");
-                display();
-                count();
+                count_all_client();
+                displaypersonne_Client();
                 clearInput(del);
                 add.setVisible(true);
             }else{
@@ -838,88 +890,113 @@ public class Simple_User_Client extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteActionPerformed
 
-    private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
-        // TODO add your handling code here:
-        int idd=Integer.parseInt(id.getText());
-        String ville_de=ville_d.getText();
-        String ville_ar=ville_a.getText();
-        String heure_de=heure.getText();
-        int prix_t=Integer.parseInt(prix.getText());
-        String duree_e=duree.getText();
-
-        trajectoire addd=new trajectoire(idd,ville_de,ville_ar,heure_de,prix_t,duree_e);
-
-        if(dbm.update_trajectoire(addd)>0){
-            JOptionPane.showMessageDialog(rootPane, "Trajectory is updated very well");
-            count();
-            display();
-            clearInput(addd);
-            add.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Trajectory isn't updated very well try again");
-        }
-
-    }//GEN-LAST:event_updateMouseClicked
-
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateActionPerformed
 
-    private void search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search1ActionPerformed
+    private void sssssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sssssActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_search1ActionPerformed
+    }//GEN-LAST:event_sssssActionPerformed
 
-    private void prixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prixActionPerformed
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_prixActionPerformed
+    }//GEN-LAST:event_emailActionPerformed
 
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
         // TODO add your handling code here:
-        String ville_de=ville_d.getText();
-        String ville_ar=ville_a.getText();
-        String heure_de=heure.getText();
-        int prix_t=Integer.parseInt(prix.getText());
-        String duree_e=duree.getText();
+        String nomC=nom.getText();
+        String prenomC=prenom.getText();
+        String telephoneC=telephone.getText();
+        String emailC=email.getText();
+        
+        client addd=new client(nomC,prenomC,telephoneC,emailC);
 
-        trajectoire add=new trajectoire(ville_de,ville_ar,heure_de,prix_t,duree_e);
-
-        if(ville_de.isEmpty()&&ville_ar.isEmpty()&&heure_de.isEmpty()&&duree_e.isEmpty()){
+        if(nomC.isEmpty()&&prenomC.isEmpty()&&telephoneC.isEmpty()&&emailC.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "The inputs are requide");
         }else{
-            if(dbm.addtrajectoire(add)>0){
-                JOptionPane.showMessageDialog(rootPane, "Trajectory is added very well");
-                count();
-                display();
-                clearInput(add);
+            if(dbm.addclinet(addd)>0){
+                JOptionPane.showMessageDialog(rootPane, "Clients is added very well");
+                displaypersonne_Client();
+                count_all_client();
+                clearInput(addd);
             }else{
-                JOptionPane.showMessageDialog(rootPane, "Trajectory isn't added very well try again");
+                JOptionPane.showMessageDialog(rootPane, "Clients isn't added very well try again");
             }
         }
     }//GEN-LAST:event_addMouseClicked
 
     private void clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseClicked
         // TODO add your handling code here:
-        int iddd=Integer.parseInt(id.getText());
-        String ville_de=ville_d.getText();
-        String ville_ar=ville_a.getText();
-        String heure_de=heure.getText();
-        int prix_t=Integer.parseInt(prix.getText());
-        String duree_e=duree.getText();
-
-        trajectoire addd=new trajectoire(iddd,ville_de,ville_ar,heure_de,prix_t,duree_e);
+        int id=Integer.parseInt(idTxt.getText());
+        String nomC=nom.getText();
+        String prenomC=prenom.getText();
+        String telephoneC=telephone.getText();
+        String emailC=email.getText();
+        
+        client addd=new client(id,nomC,prenomC,telephoneC,emailC);
         clearInput(addd);
 
         add.setVisible(true);
     }//GEN-LAST:event_clearMouseClicked
 
-    private void ville_dActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ville_dActionPerformed
+    private void nomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ville_dActionPerformed
+    }//GEN-LAST:event_nomActionPerformed
 
-    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
+    private void idTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_idActionPerformed
+    }//GEN-LAST:event_idTxtActionPerformed
 
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        String txtt = sssss.getText();
+        List<client> search =dbm.searchclient(txtt);
+
+        // Update table with the results
+        DefaultTableModel df = (DefaultTableModel) table_client.getModel();
+        df.setRowCount(0); // clear previous rows
+
+        for (client p : search) {
+            df.addRow(new Object[]{p.getId_client(),p.getNom_client(),p.getPrenom_client(),p.getTelephone_client(),p.getEmail()});
+        }
+
+        // Affiche le nombre de résultats trouvés
+        search_found.setText("" + search.size()+"");
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
+        // TODO add your handling code here:
+        int id=Integer.parseInt(idTxt.getText());
+        String nomC=nom.getText();
+        String prenomC=prenom.getText();
+        String telephoneC=telephone.getText();
+        String emailC=email.getText();
+        
+        client addd=new client(id,nomC,prenomC,telephoneC,emailC);
+        if(dbm.addclinet(addd)==1){
+            JOptionPane.showMessageDialog(rootPane, "Client added succesful !");
+            
+                displaypersonne_Client();
+                count_all_client();
+                clearInput(addd);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "error ! something went wrong");
+         }
+    }//GEN-LAST:event_updateMouseClicked
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        // TODO add your handling code here:
+        int idT=Integer.parseInt(idTxt.getText());
+        String nomC=nom.getText();
+        String prenomC=prenom.getText();
+        String telephoneC=telephone.getText();
+        String emailC=email.getText();
+        
+        client c=new client(idT,nomC,prenomC,telephoneC,emailC);
+        clearInput(c);
+    }//GEN-LAST:event_clearActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -960,10 +1037,10 @@ public class Simple_User_Client extends javax.swing.JFrame {
     private javax.swing.JButton Logout;
     private javax.swing.JButton add;
     private javax.swing.JButton clear;
-    private javax.swing.JLabel count_traj;
+    private javax.swing.JLabel count_all;
     private javax.swing.JButton delete;
-    private javax.swing.JTextField heure;
-    private javax.swing.JTextField id;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField idTxt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1004,13 +1081,13 @@ public class Simple_User_Client extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField prix;
+    private javax.swing.JTextField nom;
+    private javax.swing.JTextField prenom;
     private javax.swing.JButton search;
-    private javax.swing.JTextField search1;
     private javax.swing.JLabel search_found;
-    private javax.swing.JTable table_traj;
+    private javax.swing.JTextField sssss;
+    private javax.swing.JTable table_client;
+    private javax.swing.JTextField telephone;
     private javax.swing.JButton update;
-    private javax.swing.JTextField ville_a;
-    private javax.swing.JTextField ville_d;
     // End of variables declaration//GEN-END:variables
 }

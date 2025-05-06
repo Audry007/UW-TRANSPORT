@@ -603,9 +603,34 @@ public class databaseMapper {
             
             return 0;
         }
+     
+     //====================================== 4.7  select reservation to ticket=============================================
+    public List<reservation> select_ticket_reservation(){
+        List<reservation> foundnom=new ArrayList<>();
+        String get="SELECT reservation.id_reservation,reservation.date_reservation,reservation.nom_place,utilisateur.matricule,client.email_client FROM utilisateur INNER JOIN (client INNER JOIN reservation) ON utilisateur.matricule=reservation.matricule AND client.id_client=reservation.id_client";
+        try{
+            stmt=con.createStatement();
+            rs=stmt.executeQuery(get);
+            
+            while(rs.next()){
+                int id_reservation=rs.getInt("id_reservation");
+                String date_reservation=rs.getString("date_reservation");
+                String nom_place=rs.getString("nom_place");
+                String matricule=rs.getString("matricule");
+                String email_client=rs.getString("email_client");
+                
+                reservation ge=new reservation(id_reservation,date_reservation,nom_place,matricule,email_client);
+                foundnom.add(ge);
+            }
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return foundnom;
+    } 
+        
         
     //====================================== 4.7  select reservation to ticket=============================================
-    public List<reservation> select_ticket_reservation(String txt){
+    public List<reservation> search_ticket_reservation(String txt){
         List<reservation> foundnom=new ArrayList<>();
         String get="SELECT reservation.id_reservation,reservation.date_reservation,reservation.nom_place,utilisateur.matricule,client.email_client FROM utilisateur INNER JOIN (client INNER JOIN reservation) ON utilisateur.matricule=reservation.matricule AND client.id_client=reservation.id_client WHERE client.email_client LIKE ? ";
         try{
@@ -614,13 +639,13 @@ public class databaseMapper {
             rs=pstmt.executeQuery();
             
             while(rs.next()){
-                int id=rs.getInt("id");
-                String data_reservation=rs.getString("data_reservation");
+                int id_reservation=rs.getInt("id_reservation");
+                String date_reservation=rs.getString("date_reservation");
                 String nom_place=rs.getString("nom_place");
                 String matricule=rs.getString("matricule");
-                String email_client=rs.getString("iemail_client");
+                String email_client=rs.getString("email_client");
                 
-                reservation ge=new reservation(id,data_reservation,nom_place,matricule,email_client);
+                reservation ge=new reservation(id_reservation,date_reservation,nom_place,matricule,email_client);
                 foundnom.add(ge);
             }
         }catch(SQLException e){
@@ -795,13 +820,13 @@ public class databaseMapper {
                rs=stmt.executeQuery(select);
                
                while(rs.next()){
-                   int id=rs.getInt("id");
+                   int id_ticket=rs.getInt("id_ticket");
                    String numero_ticket=rs.getString("numero_ticket");
-                   String date_emision=rs.getString("date_emision");
+                   String date_emission=rs.getString("date_emission");
                    int id_reservation=rs.getInt("id_reservation");
                    
                    
-                   ticket pp=new ticket(id,numero_ticket,date_emision,id_reservation);
+                   ticket pp=new ticket(id_ticket,numero_ticket,date_emission,id_reservation);
                    found_ticket.add(pp);
                }
             }catch(SQLException q){
@@ -821,13 +846,13 @@ public class databaseMapper {
                  
                  rs=pstmt.executeQuery();
                while(rs.next()){
-                   int id=rs.getInt("id");
+                   int id_ticket=rs.getInt("id_ticket");
                    String numero_ticket=rs.getString("numero_ticket");
-                   String date_emision=rs.getString("date_emision");
+                   String date_emission=rs.getString("date_emission");
                    int id_reservation=rs.getInt("id_reservation");
                    
                    
-                   ticket pp=new ticket(id,numero_ticket,date_emision,id_reservation);
+                   ticket pp=new ticket(id_ticket,numero_ticket,date_emission,id_reservation);
                    found_ticket.add(pp);
                }
             }catch(SQLException q){
