@@ -798,7 +798,7 @@ public class databaseMapper {
          
     //======================================== 6.3 delete_ticket ========================================================
         public int delete_ticket(ticket r){
-            String del="DELETE FROM role where id_role=?";
+            String del="DELETE FROM ticket where id_ticket=?";
             try{
                 pstmt=con.prepareStatement(del);
                 pstmt.setInt(1, r.getId_ticket());
@@ -879,12 +879,14 @@ public class databaseMapper {
     //================================================ 6.7 display et affichage ticket =================================
         public List<ticket> generate_ticket(String txt){
             List<ticket> found=new ArrayList<>();
-            String select="SELECT ticket.numero_ticket,client.nom_client,client.prenom_client,client.email_client,reservation.id_reservation FROM ticket inner join reservation ON reservation.id_reservation=ticket.id_reservation INNER JOIN client ON client.id_client=reservation.id_client";
+            String select="SELECT ticket.date_emission,ticket.numero_ticket,client.nom_client,client.prenom_client,client.email_client,reservation.id_reservation FROM ticket inner join reservation ON reservation.id_reservation=ticket.id_reservation INNER JOIN client ON client.id_client=reservation.id_client where numero_ticket like ?";
             try{
-                 stmt=con.createStatement();
-                 rs=stmt.executeQuery(select);
+                 pstmt=con.prepareStatement(select);
+                 pstmt.setString(1, "%"+txt+"%");
                  
+                 rs=pstmt.executeQuery();
                while(rs.next()){
+                   String date_emission=rs.getString("date_emission");
                    String numero_ticket=rs.getString("numero_ticket");
                    String nom_client=rs.getString("nom_client");
                    String prenom_client=rs.getString("prenom_client");
@@ -892,7 +894,7 @@ public class databaseMapper {
                    int id_reservation=rs.getInt("id_reservation");
                    
                    
-                   ticket pp=new ticket(numero_ticket,nom_client,prenom_client,email_client,id_reservation);
+                   ticket pp=new ticket(date_emission,numero_ticket,nom_client,prenom_client,email_client,id_reservation);
                    found.add(pp);
                }
             }catch(SQLException q){

@@ -31,7 +31,13 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         display();
  
     }
-
+     //============================ void pour clear inputs ==========================
+     public void clearInput(ticket t){
+         id.setText("");
+         num.setText("");
+         date.setText("");
+         id_r.setText("");
+     }
     //======================== void pour count ticket ===============================
      public void count(){
          int total=dbm.count_ticket();
@@ -104,6 +110,7 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
 
                 sorter.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
            }
+
       
     /**
      * This method is called from within the constructor to initialize the form.
@@ -166,6 +173,7 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         id = new javax.swing.JTextField();
         num = new javax.swing.JTextField();
         clear = new javax.swing.JButton();
+        ticket = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table_r = new javax.swing.JTable();
@@ -183,17 +191,17 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         jPanel17 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        date_em = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
+        num_t = new javax.swing.JLabel();
+        prenom_c = new javax.swing.JLabel();
+        nom_t = new javax.swing.JLabel();
+        id_res = new javax.swing.JLabel();
+        email_c = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         print = new javax.swing.JButton();
 
@@ -490,6 +498,11 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
             }
         ));
         table_t.setToolTipText("");
+        table_t.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_tMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_t);
 
         btn.setBackground(new java.awt.Color(200, 197, 197));
@@ -505,6 +518,11 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         delete.setForeground(new java.awt.Color(82, 81, 81));
         delete.setText("Delete");
         delete.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteMouseClicked(evt);
+            }
+        });
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteActionPerformed(evt);
@@ -515,6 +533,11 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         update.setForeground(new java.awt.Color(82, 81, 81));
         update.setText("Update");
         update.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateMouseClicked(evt);
+            }
+        });
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateActionPerformed(evt);
@@ -618,7 +641,7 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -643,6 +666,11 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         add.setForeground(new java.awt.Color(82, 81, 81));
         add.setText("Add+");
         add.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addMouseClicked(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(82, 81, 81));
@@ -675,6 +703,20 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         clear.setForeground(new java.awt.Color(82, 81, 81));
         clear.setText("Clear");
         clear.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearMouseClicked(evt);
+            }
+        });
+
+        ticket.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        ticket.setText("Ticket");
+        ticket.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 255), 2, true));
+        ticket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ticketMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -684,22 +726,27 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel12Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
-                            .addComponent(jLabel12)
-                            .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(num, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(id_r, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(id)
+                            .addComponent(date)
+                            .addComponent(id_r)))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ticket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -710,7 +757,7 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -729,7 +776,8 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ticket, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -904,10 +952,10 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel19.setText("Date_emission");
 
-        jLabel25.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(34, 97, 168));
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("02/05/2025");
+        date_em.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        date_em.setForeground(new java.awt.Color(34, 97, 168));
+        date_em.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        date_em.setText("02/05/2025");
 
         jLabel27.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(82, 81, 81));
@@ -932,32 +980,32 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         jLabel37.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(82, 81, 81));
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel37.setText("Nom_ticket");
+        jLabel37.setText("Num_ticket");
 
-        jLabel38.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(34, 97, 168));
-        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel38.setText("35041BC4");
+        num_t.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        num_t.setForeground(new java.awt.Color(34, 97, 168));
+        num_t.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        num_t.setText("35041BC4");
 
-        jLabel39.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(34, 97, 168));
-        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel39.setText("Wakanda");
+        prenom_c.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        prenom_c.setForeground(new java.awt.Color(34, 97, 168));
+        prenom_c.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        prenom_c.setText("Wakanda");
 
-        jLabel40.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel40.setForeground(new java.awt.Color(34, 97, 168));
-        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel40.setText("Audry");
+        nom_t.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        nom_t.setForeground(new java.awt.Color(34, 97, 168));
+        nom_t.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nom_t.setText("Audry");
 
-        jLabel41.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(34, 97, 168));
-        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel41.setText("41");
+        id_res.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        id_res.setForeground(new java.awt.Color(34, 97, 168));
+        id_res.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        id_res.setText("41");
 
-        jLabel42.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(34, 97, 168));
-        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel42.setText("wakanda@gmail");
+        email_c.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        email_c.setForeground(new java.awt.Color(34, 97, 168));
+        email_c.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        email_c.setText("wakanda@gmail");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -975,27 +1023,27 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(id_res, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(email_c, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                                .addComponent(prenom_c, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(nom_t, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(date_em, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(num_t, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
@@ -1005,28 +1053,28 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(date_em, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(num_t, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nom_t, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(prenom_c, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email_c, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id_res, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
 
@@ -1055,12 +1103,11 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)))
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(print, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(print, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(7, 7, 7))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1077,7 +1124,7 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(print, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         jPanel8.add(jPanel10, java.awt.BorderLayout.CENTER);
@@ -1182,6 +1229,140 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
                print.setVisible(true);
     }//GEN-LAST:event_btn_rMouseClicked
 
+    private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
+        // TODO add your handling code here:
+        String num1=num.getText();
+        String dat=date.getText();
+        int id_re=Integer.parseInt(id_r.getText());
+        
+        ticket t=new ticket(num1,dat,id_re);
+        if(num1.isEmpty()&&dat.isEmpty()){
+          JOptionPane.showMessageDialog(rootPane, "The inputs are requide ");
+        }else{
+            if(dbm.add_ticket(t)>0){
+               JOptionPane.showMessageDialog(rootPane, "A ticket is added very well"); 
+                count();
+                count_r();
+
+                display_chaufeur();
+                display();
+                clearInput(t);
+            }else{
+               JOptionPane.showMessageDialog(rootPane, "A ticket isn't added try again"); 
+            }
+        }
+    }//GEN-LAST:event_addMouseClicked
+
+    private void clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseClicked
+        // TODO add your handling code here:
+        int id1=Integer.parseInt(id.getText());
+        String num1=num.getText();
+        String dat=date.getText();
+        int id_re=Integer.parseInt(id_r.getText());
+        
+        ticket r=new ticket(id1,num1,dat,id_re);
+        clearInput(r);
+    }//GEN-LAST:event_clearMouseClicked
+
+    private void table_tMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_tMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel df = (DefaultTableModel) table_t.getModel();
+        int selected = table_t.getSelectedRow();
+        id.setText(df.getValueAt(selected, 0).toString());
+        num.setText(df.getValueAt(selected, 1).toString());
+        date.setText(df.getValueAt(selected, 2).toString());
+        id_r.setText(df.getValueAt(selected, 3).toString());
+         
+        add.setVisible(false);
+        print.setVisible(true);
+        count();
+        display();
+    }//GEN-LAST:event_table_tMouseClicked
+
+    private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
+        // TODO add your handling code here:
+        int idd=Integer.parseInt(id.getText());
+        String num1=num.getText();
+        String date1=date.getText();
+        int id_re=Integer.parseInt(id_r.getText());
+        
+        ticket addd=new ticket(idd,num1,date1,id_re);
+        if(dbm.update_ticket(addd)>0){
+            JOptionPane.showMessageDialog(rootPane, "Ticket is updated very well !");
+            
+                count();
+                display_chaufeur();
+                clearInput(addd);
+                clearInput(addd);
+                add.setVisible(true);
+                print.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Ticket isn't updated try again !");
+         }
+    }//GEN-LAST:event_updateMouseClicked
+
+    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+        // TODO add your handling code here:
+        int idd=Integer.parseInt(id.getText());
+        String num1=num.getText();
+        String date1=date.getText();
+        int id_re=Integer.parseInt(id_r.getText());
+
+        ticket del=new ticket(idd);
+
+        int confirm = JOptionPane.showConfirmDialog(
+            rootPane,
+            "Do you want to delete this Ticket ? ",
+            "Confirmation",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+
+            if(dbm.delete_ticket(del)>0){
+                JOptionPane.showMessageDialog(rootPane, "Ticket Num : "+num1+" is deleted very well!");
+                count();
+                display_chaufeur();
+                clearInput(del);
+                add.setVisible(true);
+                print.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Ticket not deleted try again!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "you refused to delete Ticket num"+" "+num1);
+        }
+    }//GEN-LAST:event_deleteMouseClicked
+
+    private void ticketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ticketMouseClicked
+        // TODO add your handling code here:
+        String num1=num.getText();
+    int row = table_t.getSelectedRow(); // Récupérer la ligne sélectionnée
+    if (row >= 0) {
+        String numeroTicket = table_t.getValueAt(row, 0).toString(); // Supposons que c'est la 1re colonne
+
+        // Appel à la méthode generate_ticket
+        List<ticket> result =dbm.generate_ticket(num1);
+        
+        if (!result.isEmpty()) {
+            ticket t = result.get(0); // On prend le premier résultat
+            date_em.setText(t.getDate_emission());
+            num_t.setText(t.getNumero_ticket());
+            nom_t.setText(t.getNom_client());
+            prenom_c.setText(t.getPrenom_client());
+            email_c.setText(t.getEmail_client());
+            id_res.setText(String.valueOf(t.getId_reservation()));
+        } else {
+            date_em.setText("Inconnue");
+            num_t.setText("Inconnue");
+            nom_t.setText("Inconnue");
+            prenom_c.setText("Inconnue");
+            email_c.setText("Inconnue");
+            id_res.setText("Inconnue");
+        }
+    }
+    }//GEN-LAST:event_ticketMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1227,10 +1408,13 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
     private javax.swing.JLabel count_r;
     private javax.swing.JLabel count_t;
     private javax.swing.JTextField date;
+    private javax.swing.JLabel date_em;
     private javax.swing.JButton delete;
+    private javax.swing.JLabel email_c;
     private javax.swing.JLabel found_r;
     private javax.swing.JTextField id;
     private javax.swing.JTextField id_r;
+    private javax.swing.JLabel id_res;
     private javax.swing.JTextField input;
     private javax.swing.JTextField input_r;
     private javax.swing.JButton jButton1;
@@ -1255,7 +1439,6 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -1265,12 +1448,7 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel5;
@@ -1294,11 +1472,15 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel nom_t;
     private javax.swing.JTextField num;
+    private javax.swing.JLabel num_t;
+    private javax.swing.JLabel prenom_c;
     private javax.swing.JButton print;
     private javax.swing.JLabel search_found;
     private javax.swing.JTable table_r;
     private javax.swing.JTable table_t;
+    private javax.swing.JButton ticket;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

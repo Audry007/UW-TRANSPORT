@@ -40,6 +40,19 @@ public class ticket {
         this.id_reservation = id_reservation;
     }
 
+    public ticket(int id_ticket) {
+        this.id_ticket = id_ticket;
+    }
+
+    public ticket(String date_emission,String numero_ticket, String nom_client, String prenom_client, String email_client, int id_reservation) {
+        this.date_emission = date_emission;
+        this.numero_ticket = numero_ticket;
+        this.nom_client = nom_client;
+        this.prenom_client = prenom_client;
+        this.email_client = email_client;
+        this.id_reservation = id_reservation;
+    }
+
     
     
     public int getId_ticket() {
