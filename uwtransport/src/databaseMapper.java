@@ -32,7 +32,7 @@ public class databaseMapper {
     //--------------------------------------1.chaufeur-------------------------------------------------------------
     //======================================1.1 add chaufeur=========================================================
     public int addchaufeur(chaufeur c){
-        String sql="INSERT INTO chaufeur (nom_chaufeur,prenonm_chaufeur,email_chaufeur,telephone_chaufeur,permi_conduire) values (?,?,?,?,?)";
+        String sql="INSERT INTO chaufeur (nom_chaufeur,prenom_chaufeur,email_chaufeur,telephone_chaufeur,permi_conduire) values (?,?,?,?,?)";
             try{ 
                pstmt=con.prepareStatement(sql);
                pstmt.setString(1, c.getNom_chaufeur());
@@ -51,7 +51,7 @@ public class databaseMapper {
     
     //====================================1.2 update chaufeur===========================================================
     public int updatechaufeur(chaufeur c){
-        String up="UPDATE TABLE chaufeur SET nom_chaufeur=?,prenonm_chaufeur=?,email_chaufeur=?,telephone_chaufeur=?,permi_conduire=? where id_chaufeur=?";
+        String up="UPDATE chaufeur SET nom_chaufeur=?,prenom_chaufeur=?,email_chaufeur=?,telephone_chaufeur=?,permi_conduire=? where id_chaufeur=?";
          try{
              pstmt=con.prepareStatement(up);
              pstmt.setString(1, c.getNom_chaufeur());
@@ -92,12 +92,12 @@ public class databaseMapper {
            stmt=con.createStatement();
            rs=stmt.executeQuery(select);
            while(rs.next()){
-               int id_chaufeur =rs.getInt("id_chaufeur ");
+               int id_chaufeur =rs.getInt("id_chaufeur");
                String nom_chaufeur=rs.getString("nom_chaufeur");
                String prenom_chaufeur=rs.getString("prenom_chaufeur");
                String email_chaufeur=rs.getString("email_chaufeur");
                String telephone_chaufeur=rs.getString("telephone_chaufeur");
-               String permis_chaufeur=rs.getString("permis_chaufeur");
+               String permis_chaufeur=rs.getString("permi_conduire");
                
                chaufeur charger_chaufeur =new chaufeur(id_chaufeur,nom_chaufeur,prenom_chaufeur,email_chaufeur,telephone_chaufeur,permis_chaufeur);
                chaufeurs.add(charger_chaufeur);

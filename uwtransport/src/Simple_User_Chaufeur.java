@@ -826,7 +826,7 @@ public class Simple_User_Chaufeur extends javax.swing.JFrame {
 
     private void search_voyageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_voyageActionPerformed
         // TODO add your handling code here:
-                    String txtt = texte.getText();
+            String txtt = texte.getText();
             List<voyage> search = dbm.select_seacrch_voyage_voyage(txtt);
 
             // Update table with the results

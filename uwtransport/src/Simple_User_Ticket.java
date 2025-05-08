@@ -955,7 +955,7 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         date_em.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         date_em.setForeground(new java.awt.Color(34, 97, 168));
         date_em.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        date_em.setText("02/05/2025");
+        date_em.setText("Inconnue");
 
         jLabel27.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(82, 81, 81));
@@ -985,27 +985,27 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
         num_t.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         num_t.setForeground(new java.awt.Color(34, 97, 168));
         num_t.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        num_t.setText("35041BC4");
+        num_t.setText("Inconnue");
 
         prenom_c.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         prenom_c.setForeground(new java.awt.Color(34, 97, 168));
         prenom_c.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        prenom_c.setText("Wakanda");
+        prenom_c.setText("Inconnue");
 
         nom_t.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         nom_t.setForeground(new java.awt.Color(34, 97, 168));
         nom_t.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nom_t.setText("Audry");
+        nom_t.setText("Inconnue");
 
         id_res.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         id_res.setForeground(new java.awt.Color(34, 97, 168));
         id_res.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        id_res.setText("41");
+        id_res.setText("Inconnue");
 
         email_c.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         email_c.setForeground(new java.awt.Color(34, 97, 168));
         email_c.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        email_c.setText("wakanda@gmail");
+        email_c.setText("Inconnue");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);

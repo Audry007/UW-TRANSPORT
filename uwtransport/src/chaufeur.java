@@ -19,6 +19,10 @@ public class chaufeur {
     public chaufeur() {
     }
 
+    public chaufeur(int id_chaufeur) {
+        this.id_chaufeur = id_chaufeur;
+    }
+    
     public chaufeur(int id_chaufeur, String nom_chaufeur, String prenonm_chaufeur, String email_chaufeur, String telephone_chaufeur, String permi_conduire, int idvehicule) {
         this.id_chaufeur = id_chaufeur;
         this.nom_chaufeur = nom_chaufeur;
@@ -51,6 +55,21 @@ public class chaufeur {
         this.id_chaufeur = id_chaufeur;
         this.nom_chaufeur = nom_chaufeur;
         this.prenonm_chaufeur = prenonm_chaufeur;
+        this.telephone_chaufeur = telephone_chaufeur;
+        this.permi_conduire = permi_conduire;
+    }
+
+    public chaufeur(String nom_chaufeur, String prenonm_chaufeur, String telephone_chaufeur, String permi_conduire) {
+        this.nom_chaufeur = nom_chaufeur;
+        this.prenonm_chaufeur = prenonm_chaufeur;
+        this.telephone_chaufeur = telephone_chaufeur;
+        this.permi_conduire = permi_conduire;
+    }
+
+    public chaufeur(String nom_chaufeur, String prenonm_chaufeur, String email_chaufeur, String telephone_chaufeur, String permi_conduire) {
+        this.nom_chaufeur = nom_chaufeur;
+        this.prenonm_chaufeur = prenonm_chaufeur;
+        this.email_chaufeur = email_chaufeur;
         this.telephone_chaufeur = telephone_chaufeur;
         this.permi_conduire = permi_conduire;
     }

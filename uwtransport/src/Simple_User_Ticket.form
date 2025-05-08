@@ -1587,7 +1587,7 @@
                       <Color blue="a8" green="61" red="22" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="02/05/2025"/>
+                    <Property name="text" type="java.lang.String" value="Inconnue"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel27">
@@ -1659,7 +1659,7 @@
                       <Color blue="a8" green="61" red="22" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="35041BC4"/>
+                    <Property name="text" type="java.lang.String" value="Inconnue"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="prenom_c">
@@ -1671,7 +1671,7 @@
                       <Color blue="a8" green="61" red="22" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Wakanda"/>
+                    <Property name="text" type="java.lang.String" value="Inconnue"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="nom_t">
@@ -1683,7 +1683,7 @@
                       <Color blue="a8" green="61" red="22" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Audry"/>
+                    <Property name="text" type="java.lang.String" value="Inconnue"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="id_res">
@@ -1695,7 +1695,7 @@
                       <Color blue="a8" green="61" red="22" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="41"/>
+                    <Property name="text" type="java.lang.String" value="Inconnue"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="email_c">
@@ -1707,7 +1707,7 @@
                       <Color blue="a8" green="61" red="22" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="wakanda@gmail"/>
+                    <Property name="text" type="java.lang.String" value="Inconnue"/>
                   </Properties>
                 </Component>
               </SubComponents>
