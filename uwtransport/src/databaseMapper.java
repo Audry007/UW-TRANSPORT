@@ -378,7 +378,7 @@ public class databaseMapper {
     
     //===================================3.2 update exercer_utilisateur_role ===========================================
     public int updateexercer(exercer e){
-        String up="UPDATE TABLE exercer SET date_debut=?, matricule=? ,id_role=? WHERE id_exercer=?";
+        String up="UPDATE exercer SET date_debut=?, matricule=? ,id_role=? WHERE id_exercer=?";
         try{
           pstmt=con.prepareStatement(up);
           pstmt.setString(1, e.getDate_debut());
@@ -411,20 +411,18 @@ public class databaseMapper {
  //============================== 3.4 delect_all_exercer_role_users ========================================================
         public List<exercer> select_exercer(){
             List<exercer> found=new ArrayList<>();
-            String sql="SELECT exercer.id_exercer,exercer.date_debut,exercer.id_role,utilisateur.matricule,role.nom_role,utilisateur.email_user FROM utilisateur INNER JOIN (role inner join exercer) ON utilisateur.matricule=exercer.matricule AND role.id_role=exercer.id_role";
+            String sql="SELECT * FROM  exercer";
             try{
                 stmt=con.createStatement();
                 rs=stmt.executeQuery(sql);
                 
                 while(rs.next()){
-                   int id=rs.getInt("id");
+                   int id=rs.getInt("id_exercer");
                    String date_debut=rs.getString("date_debut");
                    int id_role=rs.getInt("id_role");
                    String matricule=rs.getString("matricule");
-                   String nom_role=rs.getString("nom_role");
-                   String email=rs.getString("email");
                    
-                   exercer chek=new exercer(id,date_debut,id_role,matricule,nom_role,email);
+                   exercer chek=new exercer(id,date_debut,id_role,matricule);
                    found.add(chek);
                 }
             }catch(SQLException e){
@@ -436,10 +434,9 @@ public class databaseMapper {
   //=============================== 3.5 Search_exercer_user_role =================================================
         public List<exercer> searchexercer(String txt){
             List<exercer> found=new ArrayList<>();
-            String sql="SELECT exercer.id_exercer,exercer.date_debut,exercer.id_role,utilisateur.matricule,role.nom_role,utilisateur.email_user FROM utilisateur INNER JOIN (role inner join exercer) ON utilisateur.matricule=exercer.matricule AND role.id_role=exercer.id_role WHERE utilisateur.email_user LIKE ?, role.nom_role LIKE ? ";
+            String sql="SELECT * FROM  exercer WHERE matricule LIKE ?";
             try{
               pstmt=con.prepareStatement(sql);
-              pstmt.setString(1, "%"+txt+"%");
               pstmt.setString(1, "%"+txt+"%");
               
               rs=pstmt.executeQuery();
@@ -708,8 +705,8 @@ public class databaseMapper {
                rs=stmt.executeQuery(select);
                
                while(rs.next()){
-                   int id=rs.getInt("id");
-                   String nom=rs.getString("nom");
+                   int id=rs.getInt("id_role");
+                   String nom=rs.getString("nom_role");
                    
                    role pp=new role(id,nom);
                    found.add(pp);
@@ -1165,13 +1162,13 @@ public class databaseMapper {
                String add="UPDATE  utilisateur SET nom_user =?,prenom_user =?,email_user =? ,telephone_user =?,username =?,motdepasse=? WHERE matricule=? ";
              try{
                  pstmt=con.prepareStatement(add);
-                 pstmt.setString(2, t.getNom_user());
-                 pstmt.setString(3,t.getPrenom_user());
-                 pstmt.setString(4,t.getEmail_user());
-                 pstmt.setString(5,t.getTelephone_user());
-                 pstmt.setString(6, t.getUsername());
-                 pstmt.setString(7, t.getMotdepasse());
-                 pstmt.setString(1, t.getMatricule());
+                 pstmt.setString(1, t.getNom_user());
+                 pstmt.setString(2,t.getPrenom_user());
+                 pstmt.setString(3,t.getEmail_user());
+                 pstmt.setString(4,t.getTelephone_user());
+                 pstmt.setString(5, t.getUsername());
+                 pstmt.setString(6, t.getMotdepasse());
+                 pstmt.setString(7, t.getMatricule());
                  
                  int added=pstmt.executeUpdate();
                  return added;

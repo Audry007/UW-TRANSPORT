@@ -1213,7 +1213,8 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
 
     private void btn_rMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_rMouseClicked
         // TODO add your handling code here:
-            String txtt = input_r.getText();
+
+        String txtt = input_r.getText();
             List<reservation> search = dbm.search_ticket_reservation(txtt);
 
             // Update table with the results
@@ -1337,9 +1338,9 @@ public class Simple_User_Ticket extends javax.swing.JFrame {
     private void ticketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ticketMouseClicked
         // TODO add your handling code here:
         String num1=num.getText();
-    int row = table_t.getSelectedRow(); // Récupérer la ligne sélectionnée
-    if (row >= 0) {
-        String numeroTicket = table_t.getValueAt(row, 0).toString(); // Supposons que c'est la 1re colonne
+        int row = table_t.getSelectedRow(); // Récupérer la ligne sélectionnée
+        if (row >= 0) {
+            String numeroTicket = table_t.getValueAt(row, 0).toString(); // Supposons que c'est la 1re colonne
 
         // Appel à la méthode generate_ticket
         List<ticket> result =dbm.generate_ticket(num1);

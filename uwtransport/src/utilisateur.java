@@ -20,16 +20,23 @@ private String matricule;
     public utilisateur() {
     }
     
-    public utilisateur(String matricule, String nom_user, String prenom_user, String email_user, String telephone_user, String username, String motdepasse) {
+    public utilisateur(String matricule, String nom_user, String prenom_user,String telephone_user, String email_user,  String username, String motdepasse) {
         this.matricule = matricule;
         this.nom_user = nom_user;
         this.prenom_user = prenom_user;
-        this.email_user = email_user;
         this.telephone_user = telephone_user;
+        this.email_user = email_user;
         this.username = username;
         this.motdepasse = motdepasse;
     }
+    
+    
 
+    public utilisateur(String matricule) {
+        this.matricule = matricule;
+    }
+
+    
     public utilisateur(String email_user, String motdepasse) {
         this.email_user = email_user;
         this.motdepasse = motdepasse;

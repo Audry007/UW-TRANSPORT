@@ -27,18 +27,25 @@ public class exercer {
         this.email_user = email_user;
     }
     
-    public exercer(int id_exercer, String matricule, int id_role ,String date_debut) {
+    public exercer(int id_exercer,String date_debut, int id_role , String matricule) {
         this.id_exercer = id_exercer;
-        this.matricule = matricule;
+        this.date_debut=date_debut;  
         this.id_role = id_role;
-        this.date_debut=date_debut;    
+         this.matricule = matricule;
+  
     }
 
-    public exercer(String matricule, int id_role, String date_debut) {
-        this.matricule = matricule;
-        this.id_role = id_role;
+    public exercer(String date_debut, int id_role,String matricule ) {
         this.date_debut=date_debut;
+        this.id_role = id_role;
+        this.matricule = matricule;
+
     }
+
+    public exercer(int id_exercer) {
+        this.id_exercer = id_exercer;
+    }
+   
     
 
     public int getId_exercer() {
