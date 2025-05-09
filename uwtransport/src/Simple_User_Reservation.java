@@ -1177,30 +1177,45 @@ private databaseMapper dbm;
     }// </editor-fold>//GEN-END:initComponents
 
     private void clientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientActionPerformed
-        // TODO add your handling code here:
-//        Simple_User_Client p=new Simple_User_Client();
-//        p.setVisible(true);
-//        this.dispose();
+         //TODO add your handling code here:
+        Simple_User_Client p=new Simple_User_Client();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_clientActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Reservation p=new Simple_User_Reservation();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Ticket p=new Simple_User_Ticket();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Chaufeur p=new Simple_User_Chaufeur();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Trajectoire p=new Simple_User_Trajectoire();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Voyage p=new Simple_User_Voyage();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
@@ -1302,6 +1317,9 @@ private databaseMapper dbm;
 
     private void vehiculemenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehiculemenuActionPerformed
         // TODO add your handling code here:
+        Simple_User_Vehicule p=new Simple_User_Vehicule();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_vehiculemenuActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed

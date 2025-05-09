@@ -199,6 +199,9 @@ public class index extends javax.swing.JFrame {
                     this.setVisible(false);
                 }else if(dbm.login(log)==2){
                      JOptionPane.showMessageDialog(rootPane, "You are login as Administrator");
+                     Admin p=new Admin();
+                     p.setVisible(true);
+                     this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(rootPane, "Email or Password is not correct !! ");
                     clearInput(log);

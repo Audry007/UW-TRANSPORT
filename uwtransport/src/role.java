@@ -22,7 +22,10 @@ public class role {
     public role(String nom_role) {
         this.nom_role = nom_role;
     }
-    
+
+    public role(int id_role) {
+        this.id_role = id_role;
+    }
     
     
     public int getId_role() {

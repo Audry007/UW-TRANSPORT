@@ -810,6 +810,16 @@ public class Admin_Users extends javax.swing.JFrame {
         btn_u.setBackground(new java.awt.Color(200, 197, 197));
         btn_u.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
         btn_u.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        btn_u.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_uMouseClicked(evt);
+            }
+        });
+        btn_u.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_uActionPerformed(evt);
+            }
+        });
 
         jButton11.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jButton11.setForeground(new java.awt.Color(82, 81, 81));
@@ -965,6 +975,11 @@ public class Admin_Users extends javax.swing.JFrame {
         btn_e.setBackground(new java.awt.Color(200, 197, 197));
         btn_e.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
         btn_e.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        btn_e.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_eMouseClicked(evt);
+            }
+        });
         btn_e.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_eActionPerformed(evt);
@@ -1101,10 +1116,11 @@ public class Admin_Users extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel34)
-                    .addComponent(jLabel21)
-                    .addComponent(count_e, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(count_e, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel34)
+                        .addComponent(jLabel21)))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(input_e, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1298,6 +1314,11 @@ public class Admin_Users extends javax.swing.JFrame {
         btn_r.setBackground(new java.awt.Color(200, 197, 197));
         btn_r.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
         btn_r.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        btn_r.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_rMouseClicked(evt);
+            }
+        });
         btn_r.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_rActionPerformed(evt);
@@ -1509,9 +1530,9 @@ public class Admin_Users extends javax.swing.JFrame {
                     .addComponent(matricule_e, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(add_e, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clear2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clear2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(add_e, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
@@ -1674,11 +1695,53 @@ public class Admin_Users extends javax.swing.JFrame {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
+        int id=Integer.parseInt(id_r.getText());
+        String non=nom_r.getText();
+        
+        role del=new role(id,non);
+        
+        if(non.isEmpty()){
+            JOptionPane.showMessageDialog(prenom, "the inputs are requide");
+          }else{
+            if(dbm.update_role(del)>0){
+             JOptionPane.showMessageDialog(prenom, "You Modify a role in UW-Transport");   
+             count_role();
+             display_role();
+             clearRole(del);
+             add_r.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(prenom, "Your Modification get wrong try again ");
+            }
+        }
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
+        int id=Integer.parseInt(id_r.getText());
+        String non=nom_r.getText();
+        
+        role del=new role(id);
+        
+            int confirm = JOptionPane.showConfirmDialog(
+            rootPane,
+            "Do you want this role "+non+" in UW-Transport ? ",
+            "Confirmation",
+            JOptionPane.YES_NO_OPTION
+        );
 
+        if (confirm == JOptionPane.YES_OPTION) {
+            if(dbm.delete_role(del)>0){
+                JOptionPane.showMessageDialog(prenom, "A role "+non+" is removed in UW-transport");
+                count_role();
+                display_role();
+                clearRole(del);
+                add_r.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(prenom, "A role "+non+"is not removed something went wrong try again");
+            }
+        }else{
+            JOptionPane.showMessageDialog(prenom, "You cancel to remove this "+non+" Role in UW-Transport");
+        }
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
@@ -1973,6 +2036,62 @@ public class Admin_Users extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(prenom, "you refused to Remove a fonction to User of "+matr);
         }
     }//GEN-LAST:event_deleteActionPerformed
+
+    private void btn_uActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_uActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btn_uActionPerformed
+
+    private void btn_uMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_uMouseClicked
+        // TODO add your handling code here:
+        String txtt = input_u.getText();
+        List<utilisateur> search =dbm.search_utilisateur(txtt);
+
+        // Update table with the results
+        DefaultTableModel df = (DefaultTableModel) table_u.getModel();
+        df.setRowCount(0); 
+
+        for (utilisateur p : search) {
+            df.addRow(new Object[]{p.getMatricule(),p.getNom_user(),p.getPrenom_user(),p.getTelephone_user(),p.getEmail_user(),p.getUsername(),p.getMotdepasse()});
+        }
+
+        // Affiche le nombre de résultats trouvés
+        found_u.setText("" + search.size()+"");
+    }//GEN-LAST:event_btn_uMouseClicked
+
+    private void btn_rMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_rMouseClicked
+        // TODO add your handling code here:
+        String txtt = input_r.getText();
+        List<role> search =dbm.search_role(txtt);
+
+        // Update table with the results
+        DefaultTableModel df = (DefaultTableModel) table_u.getModel();
+        df.setRowCount(0); 
+
+        for (role p : search) {
+            df.addRow(new Object[]{p.getId_role(),p.getNom_role()});
+        }
+
+        // Affiche le nombre de résultats trouvés
+        found_r.setText("" + search.size()+"");
+    }//GEN-LAST:event_btn_rMouseClicked
+
+    private void btn_eMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_eMouseClicked
+        // TODO add your handling code here:
+        String txtt = input_e.getText();
+        List<exercer> search =dbm.searchexercer(txtt);
+
+        // Update table with the results
+        DefaultTableModel df = (DefaultTableModel) table_e.getModel();
+        df.setRowCount(0); 
+
+        for (exercer p : search) {
+            df.addRow(new Object[]{p.getId_exercer(),p.getDate_debut(),p.getId_role(),p.getMatricule()});
+        }
+
+        // Affiche le nombre de résultats trouvés
+        found_e.setText("" + search.size()+"");
+    }//GEN-LAST:event_btn_eMouseClicked
 
     /**
      * @param args the command line arguments

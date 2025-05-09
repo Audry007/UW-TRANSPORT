@@ -232,7 +232,7 @@ public class databaseMapper {
     
     //===================================2.2 update clinet ==============================================================
     public int updateclinet(client c){
-        String up="UPDATE TABLE client SET nom_client=?,prenom_client=?,telephone_client=?,email_client=? where id=?";
+        String up="UPDATE client SET nom_client=?,prenom_client=?,telephone_client=?,email_client=? where id_client=?";
         try{
            pstmt=con.prepareStatement(up);
            pstmt.setString(1, c.getNom_client());
@@ -441,14 +441,12 @@ public class databaseMapper {
               
               rs=pstmt.executeQuery();
               while(rs.next()){
-                   int id=rs.getInt("id");
+                   int id=rs.getInt("id_role");
                    String date_debut=rs.getString("date_debut");
                    int id_role=rs.getInt("id_role");
                    String matricule=rs.getString("matricule");
-                   String nom_role=rs.getString("nom_role");
-                   String email=rs.getString("email");
                    
-                   exercer chek=new exercer(id,date_debut,id_role,matricule,nom_role,email);
+                   exercer chek=new exercer(id,date_debut,id_role,matricule);
                    found.add(chek);      
               }
             }catch(SQLException e){

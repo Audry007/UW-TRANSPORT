@@ -254,6 +254,11 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
         jButton7.setForeground(new java.awt.Color(82, 81, 81));
         jButton7.setText("Voyage");
         jButton7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Voyage_27px.png"))); // NOI18N
@@ -773,14 +778,23 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Ticket p=new Simple_User_Ticket();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Trajectoire p=new Simple_User_Trajectoire();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Chaufeur p=new Simple_User_Chaufeur();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void reservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservationActionPerformed
@@ -789,6 +803,9 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
 
     private void client_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_client_menuActionPerformed
         // TODO add your handling code here:
+        Simple_User_Client p=new Simple_User_Client();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_client_menuActionPerformed
 
     private void client2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_client2ActionPerformed
@@ -804,14 +821,23 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Ticket p=new Simple_User_Ticket();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Chaufeur p=new Simple_User_Chaufeur();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Voyage p=new Simple_User_Voyage();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
@@ -839,9 +865,9 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
 
     private void client2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_client2MouseClicked
         // TODO add your handling code here:
-//        Simple_User_Client p=new Simple_User_Client();
-//        p.setVisible(true);
-//        this.dispose();
+        Simple_User_Client p=new Simple_User_Client();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_client2MouseClicked
 
     private void reservationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservationMouseClicked
@@ -864,6 +890,13 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_vehiculedashbordMouseClicked
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        Simple_User_Voyage p=new Simple_User_Voyage();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -260,6 +260,11 @@ public class Admin extends javax.swing.JFrame {
         jButton7.setForeground(new java.awt.Color(82, 81, 81));
         jButton7.setText("Voyage");
         jButton7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Voyage_27px.png"))); // NOI18N
@@ -586,6 +591,11 @@ public class Admin extends javax.swing.JFrame {
                 vehiculedashbordMouseClicked(evt);
             }
         });
+        vehiculedashbord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vehiculedashbordActionPerformed(evt);
+            }
+        });
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Vehicule_27px.png"))); // NOI18N
         jLabel13.setText("jLabel5");
@@ -899,9 +909,9 @@ public class Admin extends javax.swing.JFrame {
 
     private void client_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_client_menuMouseClicked
         // TODO add your handling code here:
-//        Simple_User_Client p=new Simple_User_Client();
-//        p.setVisible(true);
-//        this.dispose();
+        Simple_User_Client p=new Simple_User_Client();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_client_menuMouseClicked
 
     private void client_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_client_menuActionPerformed
@@ -917,6 +927,9 @@ public class Admin extends javax.swing.JFrame {
 
     private void reservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservationActionPerformed
         // TODO add your handling code here:
+        Simple_User_Reservation p=new Simple_User_Reservation();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_reservationActionPerformed
 
     private void vehiculemenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehiculemenuMouseClicked
@@ -928,18 +941,30 @@ public class Admin extends javax.swing.JFrame {
 
     private void vehiculemenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehiculemenuActionPerformed
         // TODO add your handling code here:
+        Simple_User_Vehicule p=new Simple_User_Vehicule();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_vehiculemenuActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        Admin_Ticket p=new Admin_Ticket();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        Admin_Chaufeur p=new Admin_Chaufeur();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Trajectoire p=new Simple_User_Trajectoire();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
@@ -958,6 +983,9 @@ public class Admin extends javax.swing.JFrame {
 
     private void client2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_client2ActionPerformed
         // TODO add your handling code here:
+        Admin_Users p=new Admin_Users();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_client2ActionPerformed
 
     private void reservation1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservation1ActionPerformed
@@ -976,14 +1004,23 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
+        Admin_Ticket p=new Admin_Ticket();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
+        Admin_Chaufeur p=new Admin_Chaufeur();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Voyage p=new Simple_User_Voyage();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void client3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_client3MouseClicked
@@ -992,6 +1029,9 @@ public class Admin extends javax.swing.JFrame {
 
     private void client3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_client3ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Client p=new Simple_User_Client();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_client3ActionPerformed
 
     private void client4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_client4MouseClicked
@@ -1008,7 +1048,24 @@ public class Admin extends javax.swing.JFrame {
 
     private void client5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_client5ActionPerformed
         // TODO add your handling code here:
+        Admin_Users p=new Admin_Users();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_client5ActionPerformed
+
+    private void vehiculedashbordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehiculedashbordActionPerformed
+        // TODO add your handling code here:
+        Simple_User_Vehicule p=new Simple_User_Vehicule();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_vehiculedashbordActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        Simple_User_Voyage p=new Simple_User_Voyage();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
