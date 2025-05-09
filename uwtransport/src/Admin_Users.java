@@ -322,6 +322,11 @@ public class Admin_Users extends javax.swing.JFrame {
                 DashbordMouseClicked(evt);
             }
         });
+        Dashbord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DashbordActionPerformed(evt);
+            }
+        });
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Dashboard_27px.png"))); // NOI18N
@@ -356,6 +361,11 @@ public class Admin_Users extends javax.swing.JFrame {
         jButton4.setForeground(new java.awt.Color(82, 81, 81));
         jButton4.setText("Vehicule");
         jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 97, 168), 2, true));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Vehicule_27px.png"))); // NOI18N
         jLabel5.setText("jLabel5");
@@ -1595,22 +1605,37 @@ public class Admin_Users extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Client p=new Simple_User_Client();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Reservation p=new Simple_User_Reservation();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        Admin_Ticket p=new Admin_Ticket();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        Admin_Chaufeur p=new Admin_Chaufeur();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Voyage p=new Simple_User_Voyage();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1822,6 +1847,9 @@ public class Admin_Users extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
+        Simple_User_Trajectoire p=new Simple_User_Trajectoire();
+        p.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void table_uMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_uMouseClicked
@@ -2092,6 +2120,20 @@ public class Admin_Users extends javax.swing.JFrame {
         // Affiche le nombre de résultats trouvés
         found_e.setText("" + search.size()+"");
     }//GEN-LAST:event_btn_eMouseClicked
+
+    private void DashbordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashbordActionPerformed
+        // TODO add your handling code here:
+        Admin p=new Admin();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_DashbordActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        Simple_User_Vehicule p=new Simple_User_Vehicule();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
