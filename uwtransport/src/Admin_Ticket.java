@@ -1286,6 +1286,7 @@ public class Admin_Ticket extends javax.swing.JFrame {
         
         ticket r=new ticket(id1,num1,dat,id_re);
         clearInput(r);
+        add.setVisible(true);
     }//GEN-LAST:event_clearActionPerformed
 
     private void table_tMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_tMouseClicked
