@@ -4,10 +4,12 @@
  */
 import java.util.List;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.ImageIcon;
 /**
  *
  * @author audry
@@ -22,6 +24,8 @@ public class Admin_Users extends javax.swing.JFrame {
         initComponents();
         dbm=new databaseMapper();
         setTitle("UW-Transport");
+        String absolutePath = "D:/programmation/PROJECT/UW-TRANSPORT/uwtransport/src/007.png";
+        setIconImage(new ImageIcon(absolutePath).getImage());
         
         count_user();
         count_role();

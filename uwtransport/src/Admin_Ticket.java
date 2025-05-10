@@ -8,6 +8,15 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.*;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.FileOutputStream;
+import javax.swing.ImageIcon;
+import javax.swing.ImageIcon;
 /**
  *
  * @author audry
@@ -22,6 +31,8 @@ public class Admin_Ticket extends javax.swing.JFrame {
         initComponents();
         dbm=new databaseMapper();
         setTitle("UW-Transport");
+        String absolutePath = "D:/programmation/PROJECT/UW-TRANSPORT/uwtransport/src/007.png";
+        setIconImage(new ImageIcon(absolutePath).getImage());
         print.setVisible(false);
         
         count();
@@ -110,7 +121,57 @@ public class Admin_Ticket extends javax.swing.JFrame {
 
                 sorter.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
            }
+  //========================= VOID POUR IMPRIMERE ET  GENERE LE PDF DU TICKET ===================
+    public void generateTicketPDF(ticket t) {
+    Document document = new Document();
+    try {
+        String filename = "Ticket_" + t.getNumero_ticket() + ".pdf";
+        PdfWriter.getInstance(document, new FileOutputStream(filename));
+        document.open();
 
+        // Police de caractère
+        Font font = new Font(Font.HELVETICA, 12, Font.NORMAL);
+        Font titleFont = new Font(Font.HELVETICA, 16, Font.BOLD);
+
+        // Ajouter le logo (image)
+        String logoPath = "src/image/uwtransportLog.png";  // Remplace par ton chemin d'image
+        Image logo = Image.getInstance(logoPath);
+        logo.scaleToFit(100, 100);  // Ajuster la taille du logo (largeur x hauteur)
+        logo.setAlignment(Image.ALIGN_LEFT);  // Centrer le logo
+        document.add(logo);
+
+        // Titre du document
+        Paragraph title = new Paragraph("UW-TRANSPORT - Ticket de Réservation", titleFont);
+        title.setAlignment(Element.ALIGN_LEFT);
+        document.add(title);
+        document.add(new Paragraph(" ")); // Espace
+
+        // Informations du ticket
+        document.add(new Paragraph("Numéro du Ticket : " + t.getNumero_ticket(), font));
+        document.add(new Paragraph("Date d'Émission   : " + t.getDate_emission(), font));
+        document.add(new Paragraph("Nom               : " + t.getNom_client(), font));
+        document.add(new Paragraph("Prénom            : " + t.getPrenom_client(), font));
+        document.add(new Paragraph("Email             : " + t.getEmail_client(), font));
+        document.add(new Paragraph("ID Réservation    : " + t.getId_reservation(), font));
+
+        document.add(new Paragraph("\nMerci d'avoir choisi UW-TRANSPORT !", font));
+
+        document.close();
+
+        // Ouvrir automatiquement
+        File pdfFile = new File(filename);
+        if (Desktop.isDesktopSupported()) {
+            Desktop.getDesktop().open(pdfFile);
+            Desktop.getDesktop().print(pdfFile);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Erreur PDF : " + e.getMessage());
+    }
+  }         
+           
+           
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1322,6 +1383,11 @@ public class Admin_Ticket extends javax.swing.JFrame {
             prenom_c.setText(t.getPrenom_client());
             email_c.setText(t.getEmail_client());
             id_res.setText(String.valueOf(t.getId_reservation()));
+            
+            //generer automatiquement le ticket
+              generateTicketPDF(t);
+              
+              
         } else {
             date_em.setText("Inconnue");
             num_t.setText("Inconnue");

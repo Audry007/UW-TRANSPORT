@@ -1,8 +1,11 @@
+
+import javax.swing.ImageIcon;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+import javax.swing.ImageIcon;
 /**
  *
  * @author audry
@@ -18,6 +21,8 @@ public class Simple_Utilisateur extends javax.swing.JFrame {
         initComponents();
         dbm=new databaseMapper();
         setTitle("UW-Transport");
+        String absolutePath = "D:/programmation/PROJECT/UW-TRANSPORT/uwtransport/src/007.png";
+        setIconImage(new ImageIcon(absolutePath).getImage());
         
         countClient();
         countReservation();

@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+
+import javax.swing.ImageIcon;
 /**
  *
  * @author audry
@@ -17,7 +19,8 @@ public class Admin extends javax.swing.JFrame {
         initComponents();
         dbm=new databaseMapper();
         setTitle("UW-Transport");
-        this.setResizable( false);
+        String absolutePath = "D:/programmation/PROJECT/UW-TRANSPORT/uwtransport/src/007.png";
+        setIconImage(new ImageIcon(absolutePath).getImage());
         
         countClient();
         countReservation();
