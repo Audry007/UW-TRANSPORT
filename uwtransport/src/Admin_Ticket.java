@@ -1226,7 +1226,7 @@ public class Admin_Ticket extends javax.swing.JFrame {
 
         int confirm = JOptionPane.showConfirmDialog(
             rootPane,
-            "Do you want to delete this Ticket ? ",
+            "Do you want to delete this Ticket ?? ",
             "Confirmation",
             JOptionPane.YES_NO_OPTION
         );
